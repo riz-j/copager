@@ -1,22 +1,11 @@
 from aiohttp import web 
 from server import sio
-from aiohttp_cors import CorsViewMixin, ResourceOptions, setup
-# import socketio
 
-# sio = socketio.AsyncServer(async_mode='aiohttp', cors_allowed_origins='http://localhost:5070')
-
-# import behavior.base as base 
+import behavior.base 
 
 app = web.Application()
 sio.attach(app)
 
-@sio.event
-async def connect(sid, environ):
-    print(f"{sid} joined the server")
-
-@sio.event
-async def onMessage(sid, message):
-    print(f"Message from client: {message}")
 
 
 if __name__ == '__main__':

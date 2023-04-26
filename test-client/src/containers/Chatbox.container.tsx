@@ -3,6 +3,12 @@ import { useSocket } from "hooks/useSocket";
 
 export default function ChatBox() {
     const socket = useSocket();
+    /* 
+        IMPROVEMENT: declaring useSocket() will create a new WS instance 
+                    each time. Consider declaring it only once in the
+                    upper level (root parent component), or find another
+                    possible solution like useContext.
+    */
     const [input, setInput] = useState<string>("");
 
     const handleClick = () => {

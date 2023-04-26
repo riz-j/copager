@@ -11,16 +11,16 @@ def disconnect(sid):
 
 
 @sio.event
-async def onMessage(sid, message):
+async def on_message(sid, message):
     print(f"{sid}: {message}")
 
 
 @sio.event
-async def onPing(sid):
+async def on_ping(sid):
     print(f"PING from {sid}")
     sio.emit("onMessage", "PING from server")
 
 
 @sio.event
-async def onEcho(sid, message):
+async def on_echo(sid, message):
     sio.emit("onMessage", message, room=sid)

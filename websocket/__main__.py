@@ -1,10 +1,9 @@
 from aiohttp import web 
-# from server import sio
+from server import sio
 from aiohttp_cors import CorsViewMixin, ResourceOptions, setup
-import socketio
+# import socketio
 
-# sio = socketio.AsyncServer(async_mode='aiohttp', cors_allowed_origins=[])
-sio = socketio.AsyncServer(async_mode='aiohttp', cors_allowed_origins='http://localhost:5070')
+# sio = socketio.AsyncServer(async_mode='aiohttp', cors_allowed_origins='http://localhost:5070')
 
 # import behavior.base as base 
 

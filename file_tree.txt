@@ -1,0 +1,24 @@
+
+
+.
+|__ main.py
+|__ server.py
+|__ database.py
+|
+|__ behavior
+|   |__ base.py
+|   |__ lan.py
+|   
+|__ models
+|   |__ chat.py
+|   |__ user.py
+|   |__ room.py
+|
+|__utils
+|   |__ ip_builder.py
+|   |__ uuid_generator.py
+|
+|__ requirements.txt
+|__ .env
+|__ .git
+|__ .gitignore

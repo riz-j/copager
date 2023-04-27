@@ -1,7 +1,7 @@
 import { Message } from "models/Message"
 import { v4 as uuidv4 } from "uuid"
 
-type Payload = {
+interface Payload {
     type: string,
     message: string,
     sender: string,

@@ -1,18 +1,12 @@
-import { useState } from "react";
-import { useSocket } from "hooks/useSocket";
+import { useContext, useState } from "react";
 import { useMessageBuilder } from "hooks/useMessageBuilder";
+import { SocketContext } from "contexts/SocketContext";
 
 const ChatBox: React.FC = () => {
   const currentUserId: string | null = localStorage.getItem('currentUserId');
-  const socket = useSocket();
+  const socket = useContext(SocketContext);
   const { textMessageBuilder } = useMessageBuilder();
-  /* 
-        IMPROVEMENT: declaring useSocket() will create a new WS instance 
-                    each time. Consider declaring it only once in the
-                    upper level (root parent component), or find another
-                    possible solution like useContext, or make useSocket
-                    a singleton.
-    */
+  
   const [input, setInput] = useState<string>("");
 
   const handleSendMessage = () => {

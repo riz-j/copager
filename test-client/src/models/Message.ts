@@ -1,4 +1,4 @@
-interface Message {
+export interface Message {
     _id: string, 
     type: string,
     message: string,

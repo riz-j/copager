@@ -7,16 +7,16 @@ export class UserBuilder {
     constructor() {
         this.user = {} as User;
         this.user.id_ = uuidv4();
-        this.user.guest = true;
+
+        this.user.profilePic = undefined;
+        this.user.profileStatus = undefined;
+        
+        this.user.rooms = [];
+        this.user.friends = [];
     }
 
     setDisplayName(displayName: string): UserBuilder {
         this.user.displayName = displayName;
-        return this;
-    }
-
-    setGuest(guest: boolean): UserBuilder {
-        this.user.guest = guest;
         return this;
     }
 
@@ -46,42 +46,12 @@ export class UserBuilder {
     }
 
     build(): User {
-        if (!this.user.displayName) {
-            // IMPROVEMENT: If displayName is not set, generate a random displayName
-            throw new Error("Display Name must be set before building the User object");
+        if (!this.user.displayName) { 
+            throw new Error("Display Name needs to be set") 
         }
 
-        if (this.user.guest === false) {
-            if (!this.user.email) {
-                throw new Error("If User is not a guest, an email must be set before building the User object");
-            }
-        }
-
-        if (this.user.guest) {
-            if (this.user.email) {
-                throw new Error("Guests cannot have an email")
-            }
-            if (this.user.profilePic) {
-                throw new Error("Guests cannot have a profilePic")
-            }
-            if (this.user.profileStatus) {
-                throw new Error("Guests cannot have a profileStatus")
-            }
-            if (this.user.rooms) {
-                throw new Error("Guests cannot have rooms")
-            }
-            if (this.user.friends) {
-                throw new Error("Guests cannot have rooms")
-            }
-        }
-
-        if (!this.user.guest) {
-            if (!this.user.rooms) {
-                this.user.rooms = [];
-            }
-            if (!this.user.friends) {
-                this.user.friends = [];
-            }
+        if (!this.user.email) { 
+            throw new Error("Email needs to be set") 
         }
 
         return this.user;

@@ -9,7 +9,6 @@ type Payload = {
 }
 
 export const useMessageBuilder = () => {
-
     function textMessageBuilder( payload: Payload ): Message {
         const message: Message = {
             _id: uuidv4(),    
@@ -17,7 +16,7 @@ export const useMessageBuilder = () => {
             message: payload.message,
             timestamp: (new Date()).toISOString(),
 
-            from: payload.from,
+            from: "ahwbek4ab2-ajbw4kaj-123hbk-53jbqhjb3",
             room: payload.room
         } 
         return message;

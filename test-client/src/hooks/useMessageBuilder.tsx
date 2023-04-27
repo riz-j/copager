@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid"
 type Payload = {
     type: string,
     message: string,
-    from: string,
+    sender: string,
     room: string
 }
 
@@ -16,7 +16,7 @@ export const useMessageBuilder = () => {
             message: payload.message,
             timestamp: (new Date()).toISOString(),
 
-            from: "ahwbek4ab2-ajbw4kaj-123hbk-53jbqhjb3",
+            sender: "ahwbek4ab2-ajbw4kaj-123hbk-53jbqhjb3",
             room: payload.room
         } 
         return message;

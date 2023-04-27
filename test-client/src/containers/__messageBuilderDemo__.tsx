@@ -6,7 +6,7 @@ const __messageBuilderDemo__: React.FC = () => {
     const sampleMessage = textMessageBuilder({
         type: "text",
         message: "Hello there!",
-        from: "182379hahwkj419238hakwe1",
+        sender: "182379hahwkj419238hakwe1",
         room: "khb23b1hj2b31b31231b123b1"
     })
 

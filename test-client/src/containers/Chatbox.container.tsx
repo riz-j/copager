@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useSocket } from "hooks/useSocket";
+import { useMessageBuilder } from "hooks/useMessageBuilder";
 
 const ChatBox: React.FC = () => {
   const socket = useSocket();
+  const { textMessageBuilder } = useMessageBuilder();
   /* 
         IMPROVEMENT: declaring useSocket() will create a new WS instance 
                     each time. Consider declaring it only once in the
@@ -14,7 +16,14 @@ const ChatBox: React.FC = () => {
 
   const handleSendMessage = () => {
     if (socket) {
-      socket.emit("on_message", input);
+      const _message = textMessageBuilder({
+        type: "message",
+        message: input,
+        sender: "akbwekabwrka",
+        room: "kabekabwkrjbra"
+      })
+      
+      socket.emit("on_message", _message);
     }
     setInput("");
   };

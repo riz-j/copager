@@ -4,6 +4,6 @@ export interface Message {
     message: string,
     timestamp: string,    // UTC Date ISO String
 
-    from: string,   // User ID
+    sender: string,   // User ID
     room: string    // Room ID
 }

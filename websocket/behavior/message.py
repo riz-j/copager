@@ -17,3 +17,5 @@ async def on_message(sid, message):
          Sender:    {message_obj.sender}
          Room:      {message_obj.room}
         """)
+    
+    await sio.emit('onMessage', message)

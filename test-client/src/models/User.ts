@@ -1,4 +1,4 @@
-interface User {
+export interface User {
     _id: string,
     displayName: string,
     guest: boolean,

@@ -10,12 +10,12 @@ type Payload = {
 
 export const useMessageBuilder = () => {
 
-    function messageBuilder( payload: Payload ): Message {
+    function textMessageBuilder( payload: Payload ): Message {
         const message: Message = {
             _id: uuidv4(),    
             type: payload.type,
             message: payload.message,
-            timestamp: new Date(),
+            timestamp: (new Date()).toISOString(),
 
             from: payload.from,
             room: payload.room
@@ -23,5 +23,12 @@ export const useMessageBuilder = () => {
         return message;
     }
 
-    return messageBuilder;
+    /* 
+    In the future, there will be:
+        imageMessageBuilder, 
+        fileMessageBuilder, 
+        etc.
+    */
+
+    return textMessageBuilder;
 } 

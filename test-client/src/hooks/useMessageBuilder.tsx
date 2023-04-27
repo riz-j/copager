@@ -30,5 +30,5 @@ export const useMessageBuilder = () => {
         etc.
     */
 
-    return textMessageBuilder;
+    return { textMessageBuilder };
 } 

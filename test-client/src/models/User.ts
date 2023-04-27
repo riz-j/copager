@@ -9,3 +9,4 @@ export interface User {
     rooms?: string[]    // Collection of room IDs
     friends?: string[]    // Collection of User IDs
 }
+

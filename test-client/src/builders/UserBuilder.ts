@@ -47,12 +47,31 @@ export class UserBuilder {
 
     build(): User {
         if (!this.user.displayName) {
+            // IMPROVEMENT: If displayName is not set, generate a random displayName
             throw new Error("Display Name must be set before building the User object");
         }
 
         if (this.user.guest === false) {
             if (!this.user.email) {
                 throw new Error("If User is not a guest, an email must be set before building the User object");
+            }
+        }
+
+        if (this.user.guest) {
+            if (this.user.email) {
+                throw new Error("Guests cannot have an email")
+            }
+            if (this.user.profilePic) {
+                throw new Error("Guests cannot have a profilePic")
+            }
+            if (this.user.profileStatus) {
+                throw new Error("Guests cannot have a profileStatus")
+            }
+            if (this.user.rooms) {
+                throw new Error("Guests cannot have rooms")
+            }
+            if (this.user.friends) {
+                throw new Error("Guests cannot have rooms")
             }
         }
 

@@ -1,5 +1,5 @@
 export interface Message {
-    _id: string, 
+    id_: string, 
     type: string,
     message: string,
     timestamp: string,    // UTC Date ISO String

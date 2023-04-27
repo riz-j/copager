@@ -1,5 +1,5 @@
 export interface User {
-    _id: string,
+    id_: string,
     displayName: string,
     guest: boolean,
     email?: string | null,

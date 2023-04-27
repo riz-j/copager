@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class Message(BaseModel):
-    _id: str
+    id_: str
     type: str
     message: str
     timestamp: str

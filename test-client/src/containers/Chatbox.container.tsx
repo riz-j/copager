@@ -3,6 +3,7 @@ import { useSocket } from "hooks/useSocket";
 import { useMessageBuilder } from "hooks/useMessageBuilder";
 
 const ChatBox: React.FC = () => {
+  const currentUserId: string | null = localStorage.getItem('currentUserId');
   const socket = useSocket();
   const { textMessageBuilder } = useMessageBuilder();
   /* 
@@ -15,16 +16,21 @@ const ChatBox: React.FC = () => {
   const [input, setInput] = useState<string>("");
 
   const handleSendMessage = () => {
+    if (input === "") {
+      return;
+    }
+
     if (socket) {
       const _message = textMessageBuilder({
         type: "message",
         message: input,
-        sender: "akbwekabwrka",
-        room: "kabekabwkrjbra"
+        sender: currentUserId || "some_guest",
+        room: "some_room"
       })
       
       socket.emit("on_message", _message);
     }
+
     setInput("");
   };
 

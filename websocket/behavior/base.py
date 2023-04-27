@@ -11,11 +11,6 @@ def disconnect(sid):
 
 
 @sio.event
-async def on_message(sid, message):
-    print(f"{sid}: {message}")
-
-
-@sio.event
 async def on_ping(sid):
     print(f"PING from {sid}")
     sio.emit("onMessage", "PING from server")

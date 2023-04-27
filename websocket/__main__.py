@@ -2,6 +2,7 @@ from aiohttp import web
 from server import sio
 
 import behavior.base 
+import behavior.message
 
 app = web.Application()
 sio.attach(app)

@@ -20,7 +20,7 @@ const ChatBox: React.FC = () => {
         type: "message",
         message: input,
         sender: currentUserId || "some_guest",
-        room: "some_room"
+        room: "202.86.119.241"
       })
       
       // MOVE THIS TO UPPER LEVEL:

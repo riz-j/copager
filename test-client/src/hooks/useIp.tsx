@@ -10,7 +10,8 @@ interface IP_API_Response {
 }
 
 export const useIp = async () => {
-    const response = await fetch("http://ip-api.com/json/?fields=status,message,countryCode,zip,asname,mobile,proxy,query");
+    const URI: string = import.meta.env.VITE_IP_API_URI;
+    const response = await fetch(URI);
     const result: IP_API_Response = await response.json();
     
     if (result.status !== "success") {

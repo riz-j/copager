@@ -1,5 +1,5 @@
 interface IP_API_Response {
-    status?: string
+    status: string
     message?: string
     countryCode: string
     zip: string
@@ -24,7 +24,7 @@ export const useIp = async (): Promise<IP_API_Response> => {
         localStorage.setItem("_connection", "true");
     }
 
-
+    const status = result.status;
     const countryCode = result.countryCode;
     const zip = result.zip;
     const asname = result.asname;
@@ -33,6 +33,7 @@ export const useIp = async (): Promise<IP_API_Response> => {
     const query = result.query;
 
     return {
+        status,
         countryCode,
         zip,
         asname,

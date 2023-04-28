@@ -6,6 +6,7 @@ import { Message } from "models/Message";
 const ChatBox: React.FC = () => {
   const currentUserId: string | null = localStorage.getItem('currentUserId');
   const socket = useContext(SocketContext);
+  const lanRoomAddr: string | null = localStorage.getItem("lanRoomAddr");
   const { textMessageBuilder } = useMessageBuilder();
   
   const [input, setInput] = useState<string>("");
@@ -15,12 +16,12 @@ const ChatBox: React.FC = () => {
       return;
     }
 
-    if (socket) {
+    if (socket && lanRoomAddr && (lanRoomAddr !== "")) {
       const _message: Message = textMessageBuilder({
         type: "message",
         message: input,
         sender: currentUserId || "some_guest",
-        room: "202.86.119.241"
+        room: lanRoomAddr
       })
       
       // MOVE THIS TO UPPER LEVEL:

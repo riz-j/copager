@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useMessageBuilder } from "hooks/useMessageBuilder";
 import { SocketContext } from "contexts/SocketContext";
 import { Message } from "models/Message";
@@ -23,7 +23,8 @@ const ChatBox: React.FC = () => {
         room: "some_room"
       })
       
-      socket.emit("on_join_lan_room", _message.room); // SUGGESTION: Maybe just have an on_join instead of a on_join_lan_room?
+      // MOVE THIS TO UPPER LEVEL:
+      // socket.emit("on_join_lan_room", _message.room); // SUGGESTION: Maybe just have an on_join instead of a on_join_lan_room?
       socket.emit("on_message", _message);
     }
 

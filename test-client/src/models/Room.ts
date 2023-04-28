@@ -3,6 +3,7 @@ export interface Room {
     type: RoomType,
     name: string,
     pin?: number,
+    displayPicture?: string,
 
     messages: string[]
     users: string[]

@@ -1,5 +1,5 @@
 import { SocketContext } from "contexts/SocketContext";
-import { useIp } from "hooks/useIp";
+import { useLanRoom } from "hooks/useLanRoom";
 import { ReactNode, useContext, useEffect, useState } from "react"
 
 interface DashboardWrapperProps {
@@ -9,13 +9,9 @@ interface DashboardWrapperProps {
 const DashboardWrapper = ({ children }: DashboardWrapperProps) => {
     const socket = useContext(SocketContext);
     const [ip, setIp] = useState<string>("");
-
-    useIp().then(result => {
-        const { query, asname } = result;
-        setIp(query);
-
-        console.log(query + asname);
-    });
+    
+    useLanRoom(); 
+    /* If successful, LAN Room address will be stored in localStorage. */
 
     useEffect(() => {
         if (socket && ip) {

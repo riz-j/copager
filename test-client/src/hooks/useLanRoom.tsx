@@ -7,10 +7,10 @@ interface UseLanRoom {
   proxy: boolean;
 }
 
-export const useLanRoom = (): UseLanRoom => {
+export const useLanRoom = async (): Promise<UseLanRoom> => {
   const [lanRoomAddr, setLanRoomAddr] = useState<string | null>(null);
-  const [mobile, setMobile] = useState<boolean | null>(null);
-  const [proxy, setProxy] = useState<boolean | null>(null);
+  const [mobile, setMobile] = useState<boolean>(false);
+  const [proxy, setProxy] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -21,9 +21,32 @@ export const useLanRoom = (): UseLanRoom => {
       setProxy(proxy);
 
       if (query && asname && countryCode && zip && (!mobile && !proxy)) {
+
         const networkPrefix = networkExtractor(query);
-        setLanRoomAddr(`${networkPrefix}_${asname}_${countryCode}_${zip}`);
+        const __lanRoomAddr = `${networkPrefix}_${asname}_${countryCode}-${zip}`
+        setLanRoomAddr(__lanRoomAddr);
+
+        localStorage.setItem("lanRoomAddr", __lanRoomAddr);
+
+        localStorage.setItem("_mobile", "false");
+        localStorage.setItem("_proxy", "false");
+
       } else {
+        
+        if (mobile) {
+            localStorage.setItem("_mobile", "true");
+            localStorage.setItem("lanRoomAddr", "");
+            console.log("WARNING: Client is connected to cellular");
+        }
+        if (proxy) {
+            localStorage.setItem("_proxy", "true");
+            localStorage.setItem("lanRoomAddr", "");
+            console.log("WARNING: Client is connected to a Proxy");
+        } 
+        else {
+            localStorage.setItem("lanRoomAddr", "");
+        }
+
         setLanRoomAddr(null);
       }
     };
@@ -31,15 +54,11 @@ export const useLanRoom = (): UseLanRoom => {
     fetchApi();
   }, []);
 
-  if (mobile !== null && proxy !== null && lanRoomAddr) {
     return {
         lanRoomAddr,
         mobile,
         proxy,
       };
-  } else {
-    throw new Error("API promise not fulfilled")
-  }
 };
 
 

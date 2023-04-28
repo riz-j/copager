@@ -9,7 +9,7 @@ export interface Room {
 }
 
 
-enum RoomType {
+export enum RoomType {
     PublicLan = 'public_lan',
     PrivateLan = 'private_lan',
 

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useMessageBuilder } from "hooks/useMessageBuilder";
 import { SocketContext } from "contexts/SocketContext";
+import { Message } from "models/Message";
 
 const ChatBox: React.FC = () => {
   const currentUserId: string | null = localStorage.getItem('currentUserId');
@@ -15,13 +16,14 @@ const ChatBox: React.FC = () => {
     }
 
     if (socket) {
-      const _message = textMessageBuilder({
+      const _message: Message = textMessageBuilder({
         type: "message",
         message: input,
         sender: currentUserId || "some_guest",
         room: "some_room"
       })
       
+      socket.emit("on_join_lan_room", _message.room); // SUGGESTION: Maybe just have an on_join instead of a on_join_lan_room?
       socket.emit("on_message", _message);
     }
 

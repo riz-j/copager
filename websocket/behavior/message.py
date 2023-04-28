@@ -1,5 +1,4 @@
 from server import sio 
-import json
 
 from model.Message import Message
 
@@ -18,4 +17,4 @@ async def on_message(sid, message):
          Room:      {message_obj.room}
         """)
     
-    await sio.emit('onMessage', message)
+    await sio.emit('onMessage', message, room=message_obj.room)

@@ -2,8 +2,12 @@ export interface Room {
     id_: string,
     type: RoomType,
     name: string,
-    pin?: number
+    pin?: number,
+
+    messages: string[]
+    users: string[]
 }
+
 
 enum RoomType {
     PublicLan = 'public_lan',

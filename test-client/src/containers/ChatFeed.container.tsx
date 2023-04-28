@@ -22,7 +22,7 @@ const ChatFeed: React.FC = () => {
         <>
             <div>
                 { messages.map(msg => {
-                    return <MessageBubble message={msg} />
+                    return <MessageBubble key={msg.id_} message={msg} />
                 }) }
             </div>
         </>

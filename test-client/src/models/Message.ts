@@ -2,8 +2,8 @@ export interface Message {
     id_: string, 
     type: string,
     message: string,
-    timestamp: string,    // UTC Date ISO String
+    timestamp: string,    
 
-    sender: string,   // User ID
-    room: string    // Room ID
+    sender: string,   
+    room: string    
 }

@@ -7,7 +7,7 @@ export interface User extends IUser {
     profilePic: string | undefined,
     profileStatus: string | undefined,
 
-    rooms: string[]    // Collection of room IDs
-    friends: string[]    // Collection of User IDs
+    rooms: string[]    
+    friends: string[]  
 }
 

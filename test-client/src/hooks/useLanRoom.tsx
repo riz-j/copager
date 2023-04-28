@@ -1,47 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useIp } from "./useIp";
 
 interface UseLanRoom {
-    lanRoomAddr: string
-    mobile: boolean
-    proxy: boolean
+  lanRoomAddr: string | null;
+  mobile: boolean;
+  proxy: boolean;
 }
 
 export const useLanRoom = (): UseLanRoom => {
-    const [lanRoomAddr, setLanRoomAddr] = useState<string | null>(null);
+  const [lanRoomAddr, setLanRoomAddr] = useState<string | null>(null);
+  const [mobile, setMobile] = useState<boolean | null>(null);
+  const [proxy, setProxy] = useState<boolean | null>(null);
 
-    const [ip, setIp] = useState<string | null>(null);
-    const [asname, setAsname] = useState<string | null>(null);
-    const [countryCode, setCountryCode] = useState<string | null>(null);
-    const [zip, setZip] = useState<string | null>(null);
+  useEffect(() => {
+    const fetchApi = async () => {
+      const result = await useIp();
+      const { query, asname, countryCode, zip, mobile, proxy } = result;
 
-    const [mobile, setMobile] = useState<boolean | null>(null);
-    const [proxy, setProxy] = useState<boolean | null>(null);
+      setMobile(mobile);
+      setProxy(proxy);
 
-    useIp().then(result => {
-        setIp(result.query);
-        setAsname(result.asname);
-        setCountryCode(result.countryCode);
-        setZip(result.zip);
-
-        setMobile(result.mobile);
-        setProxy(result.proxy);
-    })
-
-    if (ip && asname && countryCode && zip && (!mobile && !proxy)) {
-        const networkPrefix = networkExtractor(ip);
+      if (query && asname && countryCode && zip && (!mobile && !proxy)) {
+        const networkPrefix = networkExtractor(query);
         setLanRoomAddr(`${networkPrefix}_${asname}_${countryCode}_${zip}`);
-    } 
-    else {
+      } else {
         setLanRoomAddr(null);
-    } 
+      }
+    };
 
+    fetchApi();
+  }, []);
+
+  if (mobile !== null && proxy !== null && lanRoomAddr) {
     return {
         lanRoomAddr,
         mobile,
-        proxy
-    }
-}
+        proxy,
+      };
+  } else {
+    throw new Error("API promise not fulfilled")
+  }
+};
 
 
 const networkExtractor = (ipAddress: string): string => {

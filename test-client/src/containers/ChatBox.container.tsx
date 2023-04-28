@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useMessageBuilder } from "hooks/useMessageBuilder";
 import { SocketContext } from "contexts/SocketContext";
 import { Message } from "models/Message";

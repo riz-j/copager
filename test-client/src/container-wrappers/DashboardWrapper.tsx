@@ -1,6 +1,6 @@
 import { SocketContext } from "contexts/SocketContext";
 import { useLanRoom } from "hooks/useLanRoom";
-import { ReactNode, useContext, useEffect, useState } from "react"
+import { ReactNode, useContext, useEffect } from "react"
 
 interface DashboardWrapperProps {
     children: ReactNode;

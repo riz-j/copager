@@ -12,7 +12,13 @@ const DashboardWrapper = ({ children }: DashboardWrapperProps) => {
     useLanRoom(); 
     /* If successful, LAN Room address will be stored in localStorage. */
     
-    const lanRoomAddr: string | null = localStorage.getItem("lanRoomAddr");
+    let lanRoomAddr: string | null = localStorage.getItem("lanRoomAddr");
+
+    window.addEventListener("storage", (event) => {
+        if (event.key === "lanRoomAddr") {
+            lanRoomAddr = event.newValue;
+        }
+    })  /** SUGGESTION: Create a special hook for this */
     
     useEffect(() => {
         if (socket && lanRoomAddr && (lanRoomAddr !== "")) {

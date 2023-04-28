@@ -1,7 +1,7 @@
 export interface Room {
     id_: string,
     type: RoomType,
-    name: string,
+    name?: string,
     pin?: number,
     displayPicture?: string,
 

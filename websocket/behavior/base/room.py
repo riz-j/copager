@@ -4,6 +4,7 @@ from model.Room import Room
 
 
 rooms = db["rooms"]
+messages = db["messages"]
 
 @sio.event
 async def on_join_lan_room(sid, user_id, room_id):  
@@ -31,9 +32,15 @@ async def on_join_lan_room(sid, user_id, room_id):
             sio.enter_room(sid, room_id)
             
             print(f"\n{sid} entered room {room_id}")
-            return
+
+
+        # Send saved messages in the room to the recently connected client
+        msg_list = messages.find({"room": room_id})
+        for msg in msg_list:
+            await sio.emit("onMessage", msg, room=sid)
     
     except Exception as e:
         print(f"on_lan_join_room Error: {e}")
+
 
 

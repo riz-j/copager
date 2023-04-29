@@ -8,6 +8,7 @@ interface DashboardWrapperProps {
 
 const DashboardWrapper = ({ children }: DashboardWrapperProps) => {
     const socket = useContext(SocketContext);
+    const currentUserId: string = localStorage.getItem("currentUserId") || "some_user";
     
     usePubLanRoom(); 
     /* If successful, LAN Room address will be stored in localStorage. */
@@ -22,7 +23,7 @@ const DashboardWrapper = ({ children }: DashboardWrapperProps) => {
     
     useEffect(() => {
         if (socket && pubLanRoom && (pubLanRoom !== "")) {
-            socket.emit("on_join_lan_room", pubLanRoom); // SUGGESTION: Maybe just have an on_join instead of a on_join_lan_room?
+            socket.emit("on_join_lan_room",currentUserId ,pubLanRoom); // SUGGESTION: Maybe just have an on_join instead of a on_join_lan_room?
         }
     }, [socket, pubLanRoom])
 

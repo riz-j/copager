@@ -24,28 +24,28 @@ const ChatBox: React.FC = () => {
                 .build()
 
             socket.emit("on_message", _message);
-    }
-    setInput("");
-};
+        }
+        setInput("");
+    };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Enter") {
-        handleSendMessage()
-      }
+        if (e.key === "Enter") {
+            handleSendMessage()
+        }
     }
 
     return (
-      <>
-        <div className="flex bg-blue-100 p-10">
-          <input
-            value={input}
-            onKeyDown={handleKeyDown}
-            onChange={(e) => setInput(e.target.value)}
-            className="border-2 border-slate-500 rounded p-2"
-          />
-          <button onClick={handleSendMessage}>Send</button>
-        </div>
-      </>
+        <>
+            <div className="flex bg-blue-100 p-10">
+                <input
+                    value={input}
+                    onKeyDown={handleKeyDown}
+                    onChange={(e) => setInput(e.target.value)}
+                    className="border-2 border-slate-500 rounded p-2"
+                />
+                <button onClick={handleSendMessage}>Send</button>
+            </div>
+        </>
     );
 }
 

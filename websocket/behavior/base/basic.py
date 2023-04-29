@@ -1,4 +1,5 @@
 from server import sio 
+from data.database import db
 
 @sio.event
 async def connect(sid, environ):

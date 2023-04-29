@@ -30,10 +30,10 @@ async def on_join_lan_room(sid, user_id, room_id):
 
             sio.enter_room(sid, room_id)
             
-            print(f"\n{sid} enter room {room_id}")
+            print(f"\n{sid} entered room {room_id}")
             return
     
     except Exception as e:
-        print(f"failed to connect to rooms collection: {e}")
+        print(f"on_lan_join_room Error: {e}")
 
 

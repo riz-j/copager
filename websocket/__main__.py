@@ -1,9 +1,9 @@
 from aiohttp import web 
 from server import sio
 
-import behavior.base 
-import behavior.message
-import behavior.lan_room
+import behavior.base.basic
+import behavior.base.message
+import behavior.base.room
 
 app = web.Application()
 sio.attach(app)

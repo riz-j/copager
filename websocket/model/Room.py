@@ -4,7 +4,7 @@ from typing import Optional
 class Room(BaseModel):
     id_: str
     type: str
-    name: str
+    name: Optional[str]
     pin: Optional[int] 
 
     messages: list[str] 

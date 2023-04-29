@@ -1,20 +1,35 @@
 from server import sio 
+from data.database import db
 
 from model.Message import Message
 
+messages = db["messages"]
+
 @sio.event
 async def on_message(sid, message):
-    message_obj = Message(**message)
+    msg = Message(**message)
+    # msg = Message(
+    #     _id = "akwbak",
+    # )
     
-    # print(dir(message_obj))
-    print(f"""
-        \n{sid}: 
-         id_:       {message_obj.id_}
-         Type:      {message_obj.type}
-         Message:   {message_obj.message}
-         Timestamp: {message_obj.timestamp} 
-         Sender:    {message_obj.sender}
-         Room:      {message_obj.room}
-        """)
+    # Save the message to the database
+
+    # messages.insert_one()
+
+    # Check if the message is successfully saved in the database
+
+    # Emit the message to the room
+
+    print(msg.dict(by_alias=True))
+
+    # print(f"""
+    #     \n{sid}: 
+    #      id_:       {msg.id_}
+    #      Type:      {msg.type}
+    #      Message:   {msg.message}
+    #      Timestamp: {msg.timestamp} 
+    #      Sender:    {msg.sender}
+    #      Room:      {msg.room}
+    #     """)
     
-    await sio.emit('onMessage', message, room=message_obj.room)
+    await sio.emit('onMessage', message, room=msg.room)

@@ -1,7 +1,7 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class Message(BaseModel):
-    id_: str
+    id_: str = Field(..., alias='_id')
     type: str
     message: str
     timestamp: str

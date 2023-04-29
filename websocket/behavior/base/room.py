@@ -30,7 +30,7 @@ async def on_join_lan_room(sid, user_id, room_id):
         else:
 
             if user_id not in room["users"]:
-                
+
                 rooms.update_one({"_id": room["_id"]}, {"$push": {"users": user_id}})
 
             sio.enter_room(sid, room_id)

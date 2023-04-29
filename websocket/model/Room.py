@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 class Room(BaseModel):
-    id_: str
+    _id: str
     type: str
     name: Optional[str]
     pin: Optional[int] 

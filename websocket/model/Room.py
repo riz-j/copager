@@ -1,11 +1,27 @@
-from pydantic import BaseModel
-from typing import Optional
+from dataclasses import dataclass, field
+from typing import Optional, List
 
-class Room(BaseModel):
+@dataclass
+class Room():
     _id: str
     type: str
     name: Optional[str]
     pin: Optional[int] 
 
-    messages: list[str] 
-    users: list[str] 
+    messages: List[str] = field(default_factory=list)
+    users: List[str] = field(default_factory=list)
+
+
+
+
+# from pydantic import BaseModel
+# from typing import Optional
+
+# class Room(BaseModel):
+#     _id: str
+#     type: str
+#     name: Optional[str]
+#     pin: Optional[int] 
+
+#     messages: list[str] 
+#     users: list[str] 

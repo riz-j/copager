@@ -6,6 +6,5 @@ from dotenv import dotenv_values
 config = dotenv_values(".env")
 DB_URI = config["DB_URI"]
 
-print(DB_URI)
 client = pymongo.MongoClient(DB_URI)
 db = client["copager"]

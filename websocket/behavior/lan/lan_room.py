@@ -1,7 +1,7 @@
 from server import sio 
 from data.database import db
 from model.Room import Room
-
+from dataclasses import asdict
 
 rooms = db["rooms"]
 messages = db["messages"]
@@ -12,13 +12,17 @@ async def on_join_lan_room(sid, user_id, room_id):
         room = rooms.find_one({ "_id": room_id })
 
         if room is None:
-            new_room = {
-                "_id": room_id,
-                "type": "PUB_LAN",
-                "messages": [],
-                "users": []
-            }
-            created_room = rooms.insert_one(new_room)
+            new_room = Room(
+                _id=room_id,
+                type="PUBLIC_LAN",
+            )
+            # new_room = {
+            #     "_id": room_id,
+            #     "type": "PUB_LAN",
+            #     "messages": [],
+            #     "users": []
+            # }
+            created_room = rooms.insert_one(asdict(new_room))
             rooms.update_one({"_id": created_room.inserted_id}, {"$push": {"users": user_id}})
 
             sio.enter_room(sid, room_id)

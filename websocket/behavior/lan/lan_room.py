@@ -16,12 +16,6 @@ async def on_join_lan_room(sid, user_id, room_id):
                 _id=room_id,
                 type="PUBLIC_LAN",
             )
-            # new_room = {
-            #     "_id": room_id,
-            #     "type": "PUB_LAN",
-            #     "messages": [],
-            #     "users": []
-            # }
             created_room = rooms.insert_one(asdict(new_room))
             rooms.update_one({"_id": created_room.inserted_id}, {"$push": {"users": user_id}})
 
@@ -47,6 +41,3 @@ async def on_join_lan_room(sid, user_id, room_id):
     
     except Exception as e:
         print(f"on_lan_join_room Error: {e}")
-
-
-

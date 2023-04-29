@@ -23,7 +23,7 @@ async def on_message(sid, message):
     # Check if the message is successfully saved in the database
     if saved_message.inserted_id == msg._id:
         # Insert the recently created message's ID as a reference to the room
-        rooms.update_one({"_id": msg.room}, {"$push": {"messages": saved_message.inserted_id}})
+        rooms.update_one({"_id": msg.room}, {"$push": {"messages": msg._id}})
 
         pprint.pprint(message)
         await sio.emit('onMessage', message, room=msg.room)

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export class MessageBuilder {
     private message: Message;
-    private static Types: string[] = ["PUBLIC_LAN", "PRIVATE_LAN", "DM", "GROUP"]
+    private static Types: string[] = ["text"]
 
     constructor() {
         this.message = {} as Message;
@@ -47,7 +47,7 @@ export class MessageBuilder {
         if (!this.message.room) {
             throw new Error("Message 'room' is required")
         }
-        
+
         return this.message;
     }
 }

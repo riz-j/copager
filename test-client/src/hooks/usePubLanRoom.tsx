@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useIp } from "./useIp";
 
-interface UseLanRoom {
-  lanRoomAddr: string | null;
+interface usePubLanRoom {
+  pubLanRoom: string | null;
   mobile: boolean;
   proxy: boolean;
 }
 
-export const useLanRoom = async (): Promise<UseLanRoom> => {
-  const [lanRoomAddr, setLanRoomAddr] = useState<string | null>(null);
+export const usePubLanRoom = async (): Promise<usePubLanRoom> => {
+  const [pubLanRoom, setPubLanRoom] = useState<string | null>(null);
   const [mobile, setMobile] = useState<boolean>(false);
   const [proxy, setProxy] = useState<boolean>(false);
 
@@ -23,10 +23,10 @@ export const useLanRoom = async (): Promise<UseLanRoom> => {
       if (query && asname && countryCode && zip && (!mobile && !proxy)) {
 
         const networkPrefix = networkExtractor(query);
-        const __lanRoomAddr = `${networkPrefix}_${asname}_${countryCode}-${zip}`
-        setLanRoomAddr(__lanRoomAddr);
+        const __pubLanRoom = `PUBLIC_LAN__${networkPrefix}_${asname}_${countryCode}-${zip}`
+        setPubLanRoom(__pubLanRoom);
 
-        localStorage.setItem("lanRoomAddr", __lanRoomAddr);
+        localStorage.setItem("pubLanRoom", __pubLanRoom);
 
         localStorage.setItem("_mobile", "false");
         localStorage.setItem("_proxy", "false");
@@ -35,19 +35,19 @@ export const useLanRoom = async (): Promise<UseLanRoom> => {
         
         if (mobile) {
             localStorage.setItem("_mobile", "true");
-            localStorage.setItem("lanRoomAddr", "");
+            localStorage.setItem("pubLanRoom", "");
             console.log("WARNING: Client is connected to cellular");
         }
         if (proxy) {
             localStorage.setItem("_proxy", "true");
-            localStorage.setItem("lanRoomAddr", "");
+            localStorage.setItem("pubLanRoom", "");
             console.log("WARNING: Client is connected to a Proxy");
         } 
         else {
-            localStorage.setItem("lanRoomAddr", "");
+            localStorage.setItem("pubLanRoom", "");
         }
 
-        setLanRoomAddr(null);
+        setPubLanRoom(null);
       }
     };
 
@@ -55,7 +55,7 @@ export const useLanRoom = async (): Promise<UseLanRoom> => {
   }, []);
 
     return {
-        lanRoomAddr,
+        pubLanRoom,
         mobile,
         proxy,
       };

@@ -1,5 +1,5 @@
 import { SocketContext } from "contexts/SocketContext";
-import { useLanRoom } from "hooks/useLanRoom";
+import { usePubLanRoom } from "hooks/usePubLanRoom";
 import { ReactNode, useContext, useEffect } from "react"
 
 interface DashboardWrapperProps {
@@ -9,22 +9,22 @@ interface DashboardWrapperProps {
 const DashboardWrapper = ({ children }: DashboardWrapperProps) => {
     const socket = useContext(SocketContext);
     
-    useLanRoom(); 
+    usePubLanRoom(); 
     /* If successful, LAN Room address will be stored in localStorage. */
     
-    let lanRoomAddr: string | null = localStorage.getItem("lanRoomAddr");
+    let pubLanRoom: string | null = localStorage.getItem("pubLanRoom");
 
     window.addEventListener("storage", (event) => {
-        if (event.key === "lanRoomAddr") {
-            lanRoomAddr = event.newValue;
+        if (event.key === "pubLanRoom") {
+            pubLanRoom = event.newValue;
         }
     })  /** SUGGESTION: Create a special hook for this */
     
     useEffect(() => {
-        if (socket && lanRoomAddr && (lanRoomAddr !== "")) {
-            socket.emit("on_join_lan_room", lanRoomAddr); // SUGGESTION: Maybe just have an on_join instead of a on_join_lan_room?
+        if (socket && pubLanRoom && (pubLanRoom !== "")) {
+            socket.emit("on_join_lan_room", pubLanRoom); // SUGGESTION: Maybe just have an on_join instead of a on_join_lan_room?
         }
-    }, [socket, lanRoomAddr])
+    }, [socket, pubLanRoom])
 
     return (
         <>

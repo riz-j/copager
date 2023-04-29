@@ -6,7 +6,7 @@ export class GuestBuilder {
 
     constructor() {
         this.guest = {} as Guest;
-        this.guest.id_ = uuidv4();
+        this.guest._id = uuidv4();
         // IMPROVEMENT: code that sets displayName to something random
     }
 

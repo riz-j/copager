@@ -1,5 +1,5 @@
 export interface Room {
-    id_: string,
+    _id: string,
     type: RoomType,
     name?: string,
     pin?: number,

@@ -1,7 +1,7 @@
 import { IUser } from "./interfaces/IUser"
 
 export interface User extends IUser {
-    id_: string,
+    _id: string,
     displayName: string,
     email: string,
     profilePic: string | undefined,

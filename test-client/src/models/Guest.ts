@@ -1,6 +1,6 @@
 import { IUser } from "./interfaces/IUser";
 
 export interface Guest extends IUser {
-    id_: string,
+    _id: string,
     displayName: string
 }

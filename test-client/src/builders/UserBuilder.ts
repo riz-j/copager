@@ -6,7 +6,7 @@ export class UserBuilder {
 
     constructor() {
         this.user = {} as User;
-        this.user.id_ = uuidv4();
+        this.user._id = uuidv4();
 
         this.user.profilePic = undefined;
         this.user.profileStatus = undefined;

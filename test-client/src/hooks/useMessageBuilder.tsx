@@ -11,7 +11,7 @@ interface Payload {
 export const useMessageBuilder = () => {
     function textMessageBuilder( payload: Payload ): Message {
         const message: Message = {
-            id_: uuidv4(),    
+            _id: uuidv4(),    
             type: payload.type,
             message: payload.message,
             timestamp: (new Date()).toISOString(),

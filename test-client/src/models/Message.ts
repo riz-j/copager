@@ -1,5 +1,5 @@
 export interface Message {
-    id_: string, 
+    _id: string, 
     type: string,
     message: string,
     timestamp: string,    

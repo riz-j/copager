@@ -3,7 +3,7 @@ from typing import Optional, List
 
 @dataclass
 class User():
-    id_: str
+    _id: str
     displayName: str
     email: str
     profilePic: Optional[str] = None

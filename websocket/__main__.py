@@ -4,6 +4,7 @@ from server import sio
 import behavior.base.basic
 import behavior.base.message
 import behavior.lan.lan_room
+import behavior.lan.lan_parcel
 
 app = web.Application()
 sio.attach(app)

@@ -5,9 +5,12 @@ from typing import Optional, List
 class User():
     id_: str
     displayName: str
-    email: str
     profilePic: Optional[str] = None
     profileStatus: Optional[str] = None
+    # guest: bool ???
 
-    rooms: List[str] = field(default_factory=list)
-    friends: List[str] = field(default_factory=list)
+
+# UserVM does not have:
+#   - email
+#   - rooms
+#   - friends

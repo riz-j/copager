@@ -1,6 +1,7 @@
 import { RoomVM } from "models/viewModels/RoomVM";
 import { UserVM } from "models/viewModels/UserVM";
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import { usePubLanRoom } from "hooks/usePubLanRoom";
 import { SocketContext } from "./SocketContext";
 import { Message } from "models/Message";
 import { IUser } from "models/interfaces/IUser";
@@ -20,14 +21,30 @@ interface DataContextProps {
 export const DataContext = createContext<DataStore>({} as DataStore);
 
 export const DataProvider = ({ children }: DataContextProps) => {
-    const __currentUser: Guest = {_id: "1j4nj-1n3j1n4k-3knjn2", displayName: "Joey"} 
-    const [data, setData] = useState<DataStore>({currentUser: __currentUser, rooms: [], users: [], messages: []})
+
+        usePubLanRoom(); 
+        /* If successful, LAN Room address will be stored in localStorage. */
+        let pubLanRoom: string | null = localStorage.getItem("pubLanRoom");
+        window.addEventListener("storage", (event) => {
+            if (event.key === "pubLanRoom") {
+                pubLanRoom = event.newValue;
+            }
+        })  /** SUGGESTION: Create a special hook for this */
+
+    const __currentUser: string = "1j4nj-1n3j1n4k-3knjn2" 
+    const [data, setData] = useState<DataStore>({currentUser: {} as IUser, rooms: [], users: [], messages: []})
+    // const [currentUser, setCurrentUser] = useState<IUser>({} as IUser)
     const socket = useContext(SocketContext);
 
     useEffect(() => {
-        if (socket) {
-            socket.on("onParcel", (dataParcel: DataStore) => {
-                setData(dataParcel);
+        if (socket && pubLanRoom) {
+            socket.emit("on_request_lan_parcel", __currentUser, pubLanRoom)
+            socket.on("onParcel", (dataParcel: IUser) => {
+                setData(prevData => {
+                    const newCurrentUser = dataParcel
+                    return { ...prevData, currentUser: newCurrentUser }
+                })
+                //setCurrentUser(dataParcel);
             })
     
             socket.on("onMessage", (message: Message) => {
@@ -44,7 +61,7 @@ export const DataProvider = ({ children }: DataContextProps) => {
                 socket.off("onMessage")
             }
         }
-    }, [socket])
+    }, [socket, pubLanRoom])
 
     return (
         <DataContext.Provider value={data}>

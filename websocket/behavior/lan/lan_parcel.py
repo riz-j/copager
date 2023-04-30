@@ -1,4 +1,6 @@
 from dataclasses import asdict
+import json
+import pprint
 from typing import List, Union
 from server import sio
 from data.database import db
@@ -36,21 +38,37 @@ async def on_request_lan_parcel(sid, user_id, room_id):
         # Create parcel
         print("User exists!")
 
-    _user = users.find_one({"_id": user_id})
-    _room: Room = rooms.find_one({"_id": room_id})
-    _messages: List[Message] = messages.find({"room": room_id})
-    _users: List[Union[User, Guest]] = []
-    
-    for user in _room.users:
-        _user = users.find_one({"_id": user._id})
-        _users.append(_user)
-    
-    parcel = {
-        "currentUser": _user,
-        "rooms": _room,
-        "messages": _messages,
-        "users": _users
-    }
+    _currentUser_: Guest = users.find_one({"_id": user_id})
+    print(_currentUser_)
+    await sio.emit("onParcel", _currentUser_, room=sid)
+    # _rooms_ = 
+    # currentUser
+    # currentUser's rooms
 
-    # Send the parcel
-    await sio.emit("onParcel", parcel, room=sid)
+
+
+    # _user = users.find_one({"_id": user_id})
+    # _room: Room = rooms.find_one({"_id": room_id})
+    # _messages_cursor: List[Message] = messages.find({"room": room_id})
+    # _messages = []
+    # _users: List[Union[User, Guest]] = []
+    
+    # for user in _room["users"]:
+    #     _user = users.find_one({"_id": user})
+    #     _users.append(_user)
+
+    # for message in _messages_cursor:
+    #     _messages.append(message)
+    
+    # parcel = {
+    #     "currentUser": _user,
+    #     "rooms": _room,
+    #     "messages": _messages,
+    #     "users": _users
+    # }
+
+    # parcel_json = json.dumps(parcel)
+    # pprint.pprint(parcel_json)
+
+    # # Send the parcel
+    # await sio.emit("onParcel", parcel_json, room=sid)

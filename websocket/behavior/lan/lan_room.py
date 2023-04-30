@@ -7,7 +7,10 @@ rooms = db["rooms"]
 messages = db["messages"]
 
 @sio.event
-async def on_join_lan_room(sid, user_id, room_id):  
+async def on_join_lan_room(sid, room_id):  
+    session = await sio.get_session(sid)
+    user_id = session["user_id"]
+
     try:
         room = rooms.find_one({ "_id": room_id })
 
@@ -21,7 +24,7 @@ async def on_join_lan_room(sid, user_id, room_id):
 
             sio.enter_room(sid, room_id)
 
-            print(f"\n{sid} entered room {room_id}")
+            print(f"\n{user_id} entered room {room_id}")
 
         else:
             if user_id not in room["users"]:
@@ -29,7 +32,7 @@ async def on_join_lan_room(sid, user_id, room_id):
 
             sio.enter_room(sid, room_id)
             
-            print(f"\n{sid} entered room {room_id}")
+            print(f"\n{user_id} entered room {room_id}")
 
 
     except Exception as e:

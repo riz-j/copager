@@ -11,22 +11,13 @@ const DashboardWrapper = ({ children }: DashboardWrapperProps) => {
     const socket = useContext(SocketContext);
     const pubLanRoom = useContext(DataContext).pubLanRoomAddr;
 
-    /** Get the Current User ID. */
-    let currentUserId: string | null = localStorage.getItem("currentUserId");
-
-    /** If the Current User ID does not exist, generate a new UUID  */
-    if (!currentUserId) {
-        currentUserId = uuidv4();
-        localStorage.setItem("currentUserId", currentUserId);
-    }
-
     useEffect(() => {
 
-        if (socket && pubLanRoom && currentUserId) {
+        if (socket && pubLanRoom) {
 
-            socket.emit("on_request_lan_parcel", currentUserId, pubLanRoom);
+            socket.emit("on_request_lan_parcel", pubLanRoom);
 
-            socket.emit("on_join_lan_room", currentUserId, pubLanRoom); 
+            socket.emit("on_join_lan_room", pubLanRoom); 
         }
 
     }, [socket, pubLanRoom])

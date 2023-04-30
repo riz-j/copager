@@ -1,6 +1,6 @@
 import { IUser } from "models/interfaces/IUser"
 
-export interface UserDTO extends IUser {
+export interface UserVM extends IUser {
     _id: string,
     displayName: string,
     profilePic: string | undefined,
@@ -9,7 +9,7 @@ export interface UserDTO extends IUser {
 
 
 /* 
-    UserDTO does not have attributes:
+    UserVM does not have attributes:
         - email
         - friends
         - rooms

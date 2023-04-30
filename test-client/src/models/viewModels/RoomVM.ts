@@ -1,6 +1,6 @@
 import { IRoom, RoomType } from "models/interfaces/IRoom"
 
-export interface RoomDTO extends IRoom {
+export interface RoomVM extends IRoom {
     _id: string,
     type: RoomType,
     name?: string,
@@ -12,6 +12,6 @@ export interface RoomDTO extends IRoom {
 
 
 /* 
-    RoomDTO does not have attributes:
+    RoomVM does not have attributes:
         - pin
 */

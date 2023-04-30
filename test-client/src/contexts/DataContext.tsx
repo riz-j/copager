@@ -1,15 +1,14 @@
-import { RoomDTO } from "models/DTO/RoomDTO";
-import { UserDTO } from "models/DTO/UserDTO";
+import { RoomVM } from "models/viewModels/RoomVM";
+import { UserVM } from "models/viewModels/UserVM";
 import { Message } from "models/Message";
 import { User } from "models/User";
 import { ReactNode, createContext, useContext, useState } from "react";
 import { SocketContext } from "./SocketContext";
 
-// DataParcel or DataStore???
-interface DataParcel {
+interface DataStore {
     currentUser: User
-    rooms: RoomDTO[]
-    users: UserDTO[]
+    rooms: RoomVM[]
+    users: UserVM[]
     messages: Message[]
 }
 
@@ -17,14 +16,14 @@ interface DataContextProps {
     children: ReactNode
 }
 
-export const DataContext = createContext<DataParcel | null>(null);
+export const DataContext = createContext<DataStore | null>(null);
 
 export const DataProvider = ({ children }: DataContextProps) => {
-    const [data, setData] = useState<DataParcel | null>(null)
+    const [data, setData] = useState<DataStore | null>(null)
     const socket = useContext(SocketContext);
 
     if (socket) {
-        socket.on("onParcel", (dataParcel: DataParcel) => {
+        socket.on("onParcel", (dataParcel: DataStore) => {
             setData(dataParcel);
         })
     }

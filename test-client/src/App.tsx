@@ -6,6 +6,7 @@ import DashboardWrapper from 'container-wrappers/DashboardWrapper';
 import __messageBuilderDemo__ from 'containers/__messageBuilderDemo__';
 import __sampleLogin__ from 'containers/__sampleLogin__';
 import __userBuilderDemo__ from 'containers/__userBuilderDemo__';
+import __messageDataContext from 'containers/__messageDataContext';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <div>
         <__sampleLogin__/>
         <__userBuilderDemo__/>
+        <__messageDataContext/>
         <DashboardWrapper>
           <ChatFeed/>
           <ChatBox/>

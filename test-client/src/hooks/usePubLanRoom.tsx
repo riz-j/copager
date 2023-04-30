@@ -7,7 +7,7 @@ interface usePubLanRoom {
   proxy: boolean;
 }
 
-export const usePubLanRoom = async (): Promise<usePubLanRoom> => {
+export const usePubLanRoom = (): usePubLanRoom => {
   const [pubLanRoom, setPubLanRoom] = useState<string | null>(null);
   const [mobile, setMobile] = useState<boolean>(false);
   const [proxy, setProxy] = useState<boolean>(false);

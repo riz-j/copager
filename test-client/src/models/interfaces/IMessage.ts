@@ -1,6 +1,4 @@
-import { IMessage } from "./interfaces/IMessage";
-
-export interface Message extends IMessage {
+export interface IMessage {
     _id: string, 
     type: string,
     message: string,

@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Optional, List
 
 @dataclass
-class User():
+class UserVM():
     id_: str
     displayName: str
     profilePic: Optional[str] = None

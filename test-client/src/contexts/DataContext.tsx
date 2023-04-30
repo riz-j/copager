@@ -38,17 +38,18 @@ export const DataProvider = ({ children }: DataContextProps) => {
                         
             socket.on("onParcel", (dataParcel: DataStore) => {
                 setData(prevData => {
-                    const newCurrentUser = dataParcel.currentUser
-                    return { ...prevData, currentUser: newCurrentUser }
+                    const loadedCurrentUser = dataParcel.currentUser;
+                    const loadedMessages = dataParcel.messages;
+                    return { ...prevData, currentUser: loadedCurrentUser, messages: loadedMessages }
                 })
             })
     
-            socket.on("onMessage", (message: Message) => {
-                setData(prevData => {
-                    const updatedMessages = [...prevData.messages, message] 
-                    return { ...prevData, messages: updatedMessages }
-                })
-            })
+            // socket.on("onMessage", (message: Message) => {
+            //     setData(prevData => {
+            //         const updatedMessages = [...prevData.messages, message] 
+            //         return { ...prevData, messages: updatedMessages }
+            //     })
+            // })
         }
 
         if (pubLanRoom) {

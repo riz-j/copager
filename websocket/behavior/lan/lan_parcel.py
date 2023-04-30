@@ -14,7 +14,7 @@ users = db["users"]
 messages = db["messages"]
 
 @sio.event
-async def on_request_lan_parcel(sid, user_id):
+async def on_request_lan_parcel(sid, user_id, room_id):
 
     # Check if user already exists
     user = users.find_one({"_id": user_id})
@@ -39,9 +39,18 @@ async def on_request_lan_parcel(sid, user_id):
         print("User exists!")
 
     _currentUser_: Guest = users.find_one({"_id": user_id})
+    _messages_: List[Message] = []
+
+    messages_cursor = messages.find({"room": room_id})
+    for message in messages_cursor:
+        _messages_.append(message)
+
     print(_currentUser_)
+    print(_messages_)
+    
     parcel = {
-        "currentUser": _currentUser_
+        "currentUser": _currentUser_,
+        "messages": _messages_
     }
     await sio.emit("onParcel", parcel, room=sid)
     # _rooms_ = 

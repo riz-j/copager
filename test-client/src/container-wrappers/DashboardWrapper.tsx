@@ -12,6 +12,10 @@ const DashboardWrapper = ({ children }: DashboardWrapperProps) => {
     const pubLanRoom = useContext(DataContext).pubLanRoomAddr;
 
     useEffect(() => {
+        if (socket) {
+            socket.emit("on_request_lan_parcel", currentUserId, pubLanRoom)
+        }
+
         if (socket && pubLanRoom && (pubLanRoom !== "")) {
             socket.emit("on_join_lan_room", currentUserId, pubLanRoom); // SUGGESTION: Maybe just have an on_join instead of a on_join_lan_room?
         }

@@ -5,7 +5,6 @@ import { usePubLanRoom } from "hooks/usePubLanRoom";
 import { SocketContext } from "./SocketContext";
 import { Message } from "models/Message";
 import { IUser } from "models/interfaces/IUser";
-import { Guest } from "models/Guest";
 
 interface DataStore {
     currentUser: IUser
@@ -23,7 +22,6 @@ export const DataContext = createContext<DataStore>({} as DataStore);
 
 export const DataProvider = ({ children }: DataContextProps) => {
     // console.log(`HERE IT IS: ${pubLanRoom}`);
-    const __currentUser: string = "1j4nj-1n3j1n4k-3knjn2" 
     const [data, setData] = useState<DataStore>({
         currentUser: {} as IUser, 
         rooms: [], 
@@ -37,9 +35,7 @@ export const DataProvider = ({ children }: DataContextProps) => {
 
     useEffect(() => {
         if (socket && pubLanRoom) {
-            
-            socket.emit("on_request_lan_parcel", __currentUser, pubLanRoom)
-            
+                        
             socket.on("onParcel", (dataParcel: IUser) => {
                 setData(prevData => {
                     const newCurrentUser = dataParcel

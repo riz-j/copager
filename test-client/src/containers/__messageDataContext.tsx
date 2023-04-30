@@ -5,9 +5,9 @@ import React, { useContext, useMemo, useEffect } from "react";
 const __messageDataContext: React.FC = () => {
     const messages = useContext(DataContext).messages;
 
-    useEffect(() => {
-        console.log(`FROM __messageDataContext: ${JSON.stringify(messages)}`)
-    }, [useMemo(() => [messages], [messages])])
+    // useEffect(() => {
+    //     console.log(`FROM __messageDataContext: ${JSON.stringify(messages)}`)
+    // }, [useMemo(() => [messages], [messages])])
 
     return (
         <div>

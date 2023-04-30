@@ -7,7 +7,7 @@ export interface MessageVM extends IMessage {
     timestamp: string,    
     
     sender: string,   
-    room: string 
+    room: string, 
     
     delivered: boolean
 }

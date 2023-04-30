@@ -1,4 +1,4 @@
 export interface IUser {
-    _id: string,
+    _id: string
     displayName: string
 }

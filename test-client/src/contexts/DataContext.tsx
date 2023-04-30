@@ -1,9 +1,7 @@
 import { RoomVM } from "models/viewModels/RoomVM";
 import { UserVM } from "models/viewModels/UserVM";
-import { User } from "models/User";
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { SocketContext } from "./SocketContext";
-import { MessageVM } from "models/viewModels/MessageVM";
 import { Message } from "models/Message";
 import { IUser } from "models/interfaces/IUser";
 import { Guest } from "models/Guest";

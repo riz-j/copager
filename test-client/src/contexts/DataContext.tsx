@@ -37,7 +37,9 @@ export const DataProvider = ({ children }: DataContextProps) => {
 
     useEffect(() => {
         if (socket && pubLanRoom) {
+            
             socket.emit("on_request_lan_parcel", __currentUser, pubLanRoom)
+            
             socket.on("onParcel", (dataParcel: IUser) => {
                 setData(prevData => {
                     const newCurrentUser = dataParcel

@@ -36,9 +36,9 @@ export const DataProvider = ({ children }: DataContextProps) => {
     useEffect(() => {
         if (socket && pubLanRoom) {
                         
-            socket.on("onParcel", (dataParcel: IUser) => {
+            socket.on("onParcel", (dataParcel: DataStore) => {
                 setData(prevData => {
-                    const newCurrentUser = dataParcel
+                    const newCurrentUser = dataParcel.currentUser
                     return { ...prevData, currentUser: newCurrentUser }
                 })
             })

@@ -40,7 +40,10 @@ async def on_request_lan_parcel(sid, user_id):
 
     _currentUser_: Guest = users.find_one({"_id": user_id})
     print(_currentUser_)
-    await sio.emit("onParcel", _currentUser_, room=sid)
+    parcel = {
+        "currentUser": _currentUser_
+    }
+    await sio.emit("onParcel", parcel, room=sid)
     # _rooms_ = 
     # currentUser
     # currentUser's rooms

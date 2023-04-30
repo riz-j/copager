@@ -11,7 +11,7 @@ interface DataStore {
     rooms: RoomVM[]
     users: UserVM[]
     messages: Message[] // Change to MessageDTO in the future. Maybe? Because we want to set the message to "delivered" accordingly.
-    pubLanRoomAddr: string
+    pubLanRoomAddr: string | undefined
 }
 
 interface DataContextProps {
@@ -21,16 +21,16 @@ interface DataContextProps {
 export const DataContext = createContext<DataStore>({} as DataStore);
 
 export const DataProvider = ({ children }: DataContextProps) => {
-    // console.log(`HERE IT IS: ${pubLanRoom}`);
+    const socket = useContext(SocketContext);
+    const { pubLanRoom } = usePubLanRoom(); 
+    
     const [data, setData] = useState<DataStore>({
         currentUser: {} as IUser, 
         rooms: [], 
         users: [], 
         messages: [], 
-        pubLanRoomAddr: ""
+        pubLanRoomAddr: undefined
     })
-    const socket = useContext(SocketContext);
-    const { pubLanRoom } = usePubLanRoom(); 
     
 
     useEffect(() => {
@@ -52,7 +52,9 @@ export const DataProvider = ({ children }: DataContextProps) => {
         }
 
         if (pubLanRoom) {
-            setData(prevData => { return {...prevData, pubLanRoomAddr: pubLanRoom}})
+            setData(prevData => { 
+                return {...prevData, pubLanRoomAddr: pubLanRoom}
+            })
         }
 
         return () => {

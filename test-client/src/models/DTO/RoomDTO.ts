@@ -1,10 +1,9 @@
-import { IRoom, RoomType } from "./interfaces/IRoom"
+import { IRoom, RoomType } from "models/interfaces/IRoom"
 
 export interface Room extends IRoom {
     _id: string,
     type: RoomType,
     name?: string,
-    pin?: number,
     displayPicture?: string,
 
     messages: string[]
@@ -12,3 +11,7 @@ export interface Room extends IRoom {
 }
 
 
+/* 
+    RoomDTO does not have attributes:
+        - pin
+*/

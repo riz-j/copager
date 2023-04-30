@@ -1,6 +1,6 @@
 import { IRoom, RoomType } from "models/interfaces/IRoom"
 
-export interface Room extends IRoom {
+export interface RoomDTO extends IRoom {
     _id: string,
     type: RoomType,
     name?: string,

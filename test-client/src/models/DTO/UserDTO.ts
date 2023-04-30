@@ -1,6 +1,6 @@
 import { IUser } from "models/interfaces/IUser"
 
-export interface User extends IUser {
+export interface UserDTO extends IUser {
     _id: string,
     displayName: string,
     profilePic: string | undefined,

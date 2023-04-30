@@ -44,12 +44,12 @@ export const DataProvider = ({ children }: DataContextProps) => {
                 })
             })
     
-            // socket.on("onMessage", (message: Message) => {
-            //     setData(prevData => {
-            //         const updatedMessages = [...prevData.messages, message] 
-            //         return { ...prevData, messages: updatedMessages }
-            //     })
-            // })
+            socket.on("onMessage", (message: Message) => {
+                setData(prevData => {
+                    const updatedMessages = [...prevData.messages, message] 
+                    return { ...prevData, messages: updatedMessages }
+                })
+            })
         }
 
         if (pubLanRoom) {

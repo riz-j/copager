@@ -32,12 +32,5 @@ async def on_join_lan_room(sid, user_id, room_id):
             print(f"\n{sid} entered room {room_id}")
 
 
-        # Send saved messages in the room to the recently connected client
-        msg_list = messages.find({"room": room_id}) 
-        for msg in msg_list:
-            await sio.emit("onMessage", msg, room=sid) 
-            # SUGGESTION: For this functionality, create an "onParcel" listener in the client.
-            #             "onMessage" potentially has notifications.
-    
     except Exception as e:
         print(f"on_lan_join_room Error: {e}")

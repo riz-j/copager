@@ -1,8 +1,9 @@
 from aiohttp import web 
 from server import sio
 
-import behavior.base.basic
+import behavior.base.connection
 import behavior.base.message
+import behavior.base.echo
 import behavior.lan.lan_room
 import behavior.lan.lan_parcel
 

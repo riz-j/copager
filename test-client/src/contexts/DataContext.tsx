@@ -2,9 +2,11 @@ import { RoomDTO } from "models/DTO/RoomDTO";
 import { UserDTO } from "models/DTO/UserDTO";
 import { Message } from "models/Message";
 import { User } from "models/User";
-import { ReactNode, createContext } from "react";
+import { ReactNode, createContext, useContext, useState } from "react";
+import { SocketContext } from "./SocketContext";
 
-interface DataContext {
+// DataParcel or DataStore???
+interface DataParcel {
     currentUser: User
     rooms: RoomDTO[]
     users: UserDTO[]
@@ -14,14 +16,21 @@ interface DataContext {
 interface DataContextProps {
     children: ReactNode
 }
-// After done testing, remove "string" from below
-export const DataContext = createContext<DataContext | null | string>(null);
+
+export const DataContext = createContext<DataParcel | null>(null);
 
 export const DataProvider = ({ children }: DataContextProps) => {
-    const __test: string = "Hello! OMG DataContext is Workin!"
+    const [data, setData] = useState<DataParcel | null>(null)
+    const socket = useContext(SocketContext);
+
+    if (socket) {
+        socket.on("onParcel", (dataParcel: DataParcel) => {
+            setData(dataParcel);
+        })
+    }
 
     return (
-        <DataContext.Provider value={__test}>
+        <DataContext.Provider value={data}>
             {children}
         </DataContext.Provider>
     )

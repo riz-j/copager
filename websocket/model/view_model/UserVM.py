@@ -3,7 +3,7 @@ from typing import Optional, List
 
 @dataclass
 class UserVM():
-    id_: str
+    _id: str
     displayName: str
     profilePic: Optional[str] = None
     profileStatus: Optional[str] = None

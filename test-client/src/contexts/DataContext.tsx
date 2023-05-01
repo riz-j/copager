@@ -39,8 +39,13 @@ export const DataProvider = ({ children }: DataContextProps) => {
             socket.on("onParcel", (dataParcel: DataStore) => {
                 setData(prevData => {
                     const loadedCurrentUser = dataParcel.currentUser;
+                    const loadedUsers = dataParcel.users;
                     const loadedMessages = dataParcel.messages;
-                    return { ...prevData, currentUser: loadedCurrentUser, messages: loadedMessages }
+                    return { ...prevData, 
+                        currentUser: loadedCurrentUser, 
+                        users: loadedUsers, 
+                        messages: loadedMessages
+                    }
                 })
             })
     

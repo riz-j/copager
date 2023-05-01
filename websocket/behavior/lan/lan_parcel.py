@@ -56,8 +56,10 @@ async def on_request_lan_parcel(sid):
 
         # Serialize the document to a UserVM
         lan_user_vm = UserVM(
-            _id=lan_user["_id"],
-            displayName=lan_user["displayName"]
+            _id = lan_user.get("_id"),
+            displayName = lan_user.get("displayName"),
+            profilePic = lan_user.get("profilePic"),
+            profileStatus = lan_user.get("profileStatus")
         )  
         # Append to the list
         lan_users.append(asdict(lan_user_vm))

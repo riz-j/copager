@@ -11,7 +11,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
     const isCurrentUser: boolean = currentUserId === props.message.sender;
     
     const alignment: string = isCurrentUser ? "justify-end" : "justify-start";
-    const bgColor: string = isCurrentUser ? "bg-blue-200" : "bg-gray-200";
+    const bgColor: string = isCurrentUser ? "bg-blue-300" : "bg-gray-300";
 
     return (
         <div className={`flex w-full ${alignment}`}>

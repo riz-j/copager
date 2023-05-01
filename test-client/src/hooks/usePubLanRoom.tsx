@@ -37,11 +37,13 @@ export const usePubLanRoom = (): usePubLanRoom => {
             localStorage.setItem("_mobile", "true");
             localStorage.setItem("pubLanRoom", "");
             console.log("WARNING: Client is connected to cellular");
+            alert("WARNING: Client is connected to cellular");
         }
         if (proxy) {
             localStorage.setItem("_proxy", "true");
             localStorage.setItem("pubLanRoom", "");
             console.log("WARNING: Client is connected to a Proxy");
+            alert("WARNING: Client is connected to a Proxy");
         } 
         else {
             localStorage.setItem("pubLanRoom", "");

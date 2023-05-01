@@ -50,8 +50,8 @@ async def connect(sid, environ):
 @sio.event
 async def disconnect(sid):
     session = await sio.get_session(sid)
-    user_id = session["user_id"]
-    lan_room = session["lan_room"]
+    user_id = session.get("user_id")
+    lan_room = session.get("lan_room")
 
     # Remove the session from the connection list
     connection_manager = ConnectionManager()
@@ -60,14 +60,17 @@ async def disconnect(sid):
     # Check if the user's other sessions still exist
     other_sessions_exist = connection_manager.session_exists(user_id)
     
-    if other_sessions_exist == False:
-        # Remove user ID reference from the LAN room document in the database
-        ack = rooms.update_one({"_id": lan_room}, {"$pull": {"users": user_id}})
+    # Check if user_id and lan_room contains values
+    if user_id and lan_room:
         
-        if ack.acknowledged == False:
-            raise Exception("Failed to remove User ID reference out of the LAN room document")
+        if other_sessions_exist == False:
+            # Remove user ID reference from the LAN room document in the database
+            ack = rooms.update_one({"_id": lan_room}, {"$pull": {"users": user_id}})
+            
+            if ack.acknowledged == False:
+                raise Exception("Failed to remove User ID reference out of the LAN room document")
 
-        print(user_id + " left the room " + lan_room)
+            print(user_id + " left the room " + lan_room)
     
     print(f"{user_id} disconnected")
 

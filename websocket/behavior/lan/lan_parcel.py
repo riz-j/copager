@@ -15,8 +15,11 @@ messages = db["messages"]
 @sio.event
 async def on_request_lan_parcel(sid):
     session = await sio.get_session(sid)
-    user_id = session["user_id"]
-    lan_room = session["lan_room"]
+    user_id = session.get("user_id")
+    lan_room = session.get("lan_room")
+
+    if not lan_room and not user_id:
+        return False
 
     # Check if user already exists
     user = users.find_one({"_id": user_id})

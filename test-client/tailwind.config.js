@@ -6,7 +6,7 @@ export default {
   ],
   theme: {
     fontFamily: {
-      'ibm-plex': ['IBM Plex Sans', 'sans-serif']
+      'main': ['', 'sans-serif']
     },
     extend: {},
   },

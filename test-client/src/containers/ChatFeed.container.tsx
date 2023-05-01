@@ -1,10 +1,21 @@
 import MessageBubble from "components/MessageBubble.component";
 import { DataContext } from "contexts/DataContext";
+import { IUser } from "models/interfaces/IUser";
 import { useContext, useEffect, useRef } from "react";
 
 const ChatFeed: React.FC = () => {
     const messages = useContext(DataContext).messages;
+    let users: IUser[] = useContext(DataContext).users;
+    const currentUser = useContext(DataContext).currentUser;
     
+    /** Check if current user is in the array of users */
+    const userExists: boolean = users.some(user => user._id === currentUser._id);
+
+    /** If user does not exist in the array of current users, append the current user */
+    if (!userExists) {
+        users = [...users, currentUser];
+    }
+
     const bottom = useRef<HTMLDivElement | null>(null)
     useEffect(() => {
         if (bottom.current) {
@@ -22,7 +33,12 @@ const ChatFeed: React.FC = () => {
 
                     if (prevMsg) {
                         if (prevMsg.sender !== msg.sender) {
-                            return <MessageBubble key={msg._id} message={msg} startUserBlock={true} />
+                            return <MessageBubble 
+                                key={msg._id} 
+                                message={msg} 
+                                startUserBlock={true} 
+                                senderDisplayName={users.find(user => user._id === msg.sender)?.displayName || "unkown"}
+                            />
                         }
                     }
                     if (nextMsg) {

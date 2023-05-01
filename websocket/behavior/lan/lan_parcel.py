@@ -56,7 +56,7 @@ async def on_request_lan_parcel(sid):
     for user_id in user_ids_cursor[0]["users"]:
         # Fetch the user document
         lan_user = users.find_one({"_id": user_id})
-
+        print("\nAJWNN\n" + user_id + "\nawejnanje\n")
         # Serialize the document to a UserVM
         lan_user_vm = UserVM(
             _id = lan_user.get("_id"),
@@ -66,6 +66,25 @@ async def on_request_lan_parcel(sid):
         )  
         # Append to the list
         lan_users.append(asdict(lan_user_vm))
+
+    # Because of a chance of delay in inserting current user to the database,
+    # the server might have not appended the current user to the "lan_users" list.
+    # Hence, we must add the current user to the lan users if current user 
+    # does currently exist in the "lan_users" list.
+    current_user_vm = UserVM(
+        _id = current_user.get("_id"),
+        displayName = current_user.get("displayName"),
+        profilePic = current_user.get("profilePic"),
+        profileStatus = current_user.get("profileStatus")
+    )
+    current_user_is_in_lan_room = False
+
+    for lan_user in lan_users:
+        if current_user["_id"] == lan_user["_id"]:
+            current_user_is_in_lan_room = True
+
+    if current_user_is_in_lan_room == False:
+        lan_users.append(asdict(current_user_vm))
 
 
     # Pack up the parcel 

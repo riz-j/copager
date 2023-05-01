@@ -12,7 +12,7 @@ import ChatHeader from 'containers/ChatHeader.container';
 function App() {
   return (
     <>
-      <div className='font-ibm-plex'>
+      <div className=''>
         {/* <__sampleLogin__/> */}
         {/* <__userBuilderDemo__/> */}
         {/* <__messageDataContext/> */}

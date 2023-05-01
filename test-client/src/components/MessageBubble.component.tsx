@@ -6,6 +6,7 @@ interface MessageBubbleProps {
     message: Message
     endUserBlock?: boolean 
     startUserBlock?: boolean
+    senderDisplayName?: string
 }
 
 const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
@@ -21,7 +22,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
 
     return (
         <>
-            {/* { props.startUserBlock && <div className="h-2" />} */}
+            { props.startUserBlock && <p>{props.senderDisplayName}</p>} 
             <div className={`flex w-full ${alignment}`}>
                 <div className={
                     `flex my-[0.1rem] max-w-[80vw] py-2 px-3 

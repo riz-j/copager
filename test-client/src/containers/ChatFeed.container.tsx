@@ -6,15 +6,6 @@ import { useContext, useEffect, useRef } from "react";
 const ChatFeed: React.FC = () => {
     const messages = useContext(DataContext).messages;
     let users: IUser[] = useContext(DataContext).users;
-    const currentUser = useContext(DataContext).currentUser;
-    
-    /** Check if current user is in the array of users */
-    const userExists: boolean = users.some(user => user._id === currentUser._id);
-
-    /** If user does not exist in the array of current users, append the current user */
-    if (!userExists) {
-        users = [...users, currentUser];
-    }
 
     const bottom = useRef<HTMLDivElement | null>(null)
     useEffect(() => {

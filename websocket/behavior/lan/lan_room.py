@@ -28,6 +28,8 @@ async def on_join_lan_room(sid):
 
             sio.enter_room(sid, lan_room)
 
+            # TO DO: Inform everyone else in the room that a user has joined 
+            #        and emit the new user info.
             print(f"\n{user_id} entered room {lan_room}")
 
         else:

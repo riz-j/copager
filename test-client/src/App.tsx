@@ -7,15 +7,17 @@ import __messageBuilderDemo__ from 'containers/__messageBuilderDemo__';
 import __sampleLogin__ from 'containers/__sampleLogin__';
 import __userBuilderDemo__ from 'containers/__userBuilderDemo__';
 import __messageDataContext from 'containers/__messageDataContext';
+import ChatHeader from 'containers/ChatHeader.container';
 
 function App() {
   return (
     <>
-      <div>
+      <div className='font-ibm-plex'>
         {/* <__sampleLogin__/> */}
         {/* <__userBuilderDemo__/> */}
         {/* <__messageDataContext/> */}
         <DashboardWrapper>
+          {/* <ChatHeader/> */}
           <ChatFeed/>
           <ChatBox/>
         </DashboardWrapper>

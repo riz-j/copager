@@ -5,6 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'ibm-plex': ['IBM Plex Sans', 'sans-serif']
+    },
     extend: {},
   },
   plugins: [],

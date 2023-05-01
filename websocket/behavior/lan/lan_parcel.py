@@ -32,19 +32,19 @@ async def on_request_lan_parcel(sid, room_id):
 
 
     # Get the current user information
-    _currentUser_: Guest = users.find_one({"_id": user_id})
+    current_user: Guest = users.find_one({"_id": user_id})
 
-    # Initialize empty "_messages_" list and append messages to the "_messages_" list
-    _messages_: List[Message] = []
+    # Initialize empty "lan_messages" list and append messages to the "lan_messages" list
+    lan_messages: List[Message] = []
 
     messages_cursor = messages.find({"room": room_id})
     for message in messages_cursor:
-        _messages_.append(message)
+        lan_messages.append(message)
 
     # Pack up the parcel 
     parcel = {
-        "currentUser": _currentUser_,
-        "messages": _messages_
+        "currentUser": current_user,
+        "messages": lan_messages
     }
 
     # Emit the parcel to the client

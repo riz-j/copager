@@ -17,7 +17,7 @@ const DashboardWrapper = ({ children }: DashboardWrapperProps) => {
 
             socket.emit("on_request_lan_parcel");
 
-            socket.emit("on_join_lan_room", pubLanRoom); 
+            socket.emit("on_join_lan_room"); 
         }
 
     }, [socket, pubLanRoom])

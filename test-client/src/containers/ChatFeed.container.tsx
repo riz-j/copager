@@ -15,7 +15,7 @@ const ChatFeed: React.FC = () => {
 
     return (
         <>
-            <div className="bg-gray-100">
+            <div className="absolute bottom-20 bg-red-100 h-full overflow-y-scroll">
                 { messages.map(msg => {
                     return <MessageBubble key={msg._id} message={msg} />
                 }) }

@@ -16,8 +16,8 @@ const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
     const textAlignment: string = isCurrentUser ? "justify-end" : "justify start";
     const bgColor: string = isCurrentUser ? "bg-blue-600" : "bg-gray-200";
     const textColor: string = isCurrentUser ? "text-white" : "text-black";
-    const selfBorderRadius: string = props.startUserBlock ? "rounded-l-lg rounded-tr-lg rounded-br-md" : "rounded-l-lg";
-    const othersBorderRadius: string = props.startUserBlock ? "rounded-r-lg rounded-tl-lg rounded-bl-md" : "rounded-r-lg";
+    const selfBorderRadius: string = props.startUserBlock ? "rounded-l-lg rounded-tr-lg rounded-br-sm" : "rounded-l-lg rounded-r-sm";
+    const othersBorderRadius: string = props.startUserBlock ? "rounded-r-lg rounded-tl-lg rounded-bl-sm" : "rounded-r-lg rounded-l-sm";
 
     return (
         <>

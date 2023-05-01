@@ -36,13 +36,14 @@ const ChatBox: React.FC = () => {
 
     return (
         <>
-            <div className="fixed bottom-0 right-0 w-full h-20 bg-green-100 p-10 z-10">
-                <div className="flex justify-between items-center h-full w-full">
+            {/* Insert "bg-green-100" below to debug */}
+            <div className="fixed bottom-0 right-0 w-full h-20 backdrop-filter bg-white/90 backdrop-blur-lg z-20">
+                <div className="flex justify-around items-center h-full w-full">
                     <input
                         value={input}
                         onKeyDown={handleKeyDown}
                         onChange={(e) => setInput(e.target.value)}
-                        className="border-2 border-slate-500 rounded p-2"
+                        className="border-2 border-slate-500 rounded-lg p-2"
                     />
                     <button onClick={handleSendMessage}>Send</button>
                 </div>

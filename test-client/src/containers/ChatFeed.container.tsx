@@ -31,17 +31,20 @@ const ChatFeed: React.FC = () => {
                     const prevMsg = index > 0 ? messages[index - 1] : null;
                     const nextMsg = index < (messages.length - 1) ? messages[index + 1] : null;
                     const isCurrentUser: boolean = currentUser._id === msg.sender;
-                    const senderDisplayName: string = users.find(user => user._id === msg.sender)?.displayName || "unkown";
+                    const sender: IUser = users.find(user => user._id === msg.sender) || {} as IUser;
+                    const senderDisplayName: string = sender.displayName || "unkown";
+                    const senderDisplayColor: string = sender.displayColor || "#ef4444";
 
                     if (prevMsg) {
                         if (prevMsg.sender !== msg.sender) {
                             /** Start of a new user chat block */
                             return (
                                 <div className={`flex flex-col items-start`}>
-                                    <p className="mt-3 mb-1 text-sm font-medium text-red-500">{senderDisplayName} {isCurrentUser ? "(You)" : ""}</p>
+                                    <p className="mt-3 mb-1 text-sm font-medium" style={{color: senderDisplayColor}}>{senderDisplayName} {isCurrentUser ? "(You)" : ""}</p>
                                     <MessageBubble 
                                         key={msg._id} 
                                         message={msg} 
+                                        displayColor={senderDisplayColor}
                                         startUserBlock={true} 
                                     />
                                 </div>
@@ -52,10 +55,19 @@ const ChatFeed: React.FC = () => {
 
                         if (nextMsg.sender !== msg.sender) {
                             /** End of a user chat block */
-                            return <MessageBubble key={msg._id} message={msg} endUserBlock={true} />
+                            return <MessageBubble 
+                                key={msg._id} 
+                                message={msg} 
+                                endUserBlock={true} 
+                                displayColor={senderDisplayColor} 
+                            />
                         }
                     }
-                    return <MessageBubble key={msg._id} message={msg} />
+                    return <MessageBubble 
+                        key={msg._id} 
+                        message={msg}
+                        displayColor={senderDisplayColor}
+                    />
                 }) }
                 <div ref={bottom} />
             </div>

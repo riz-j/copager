@@ -1,12 +1,11 @@
-import { DataContext } from "contexts/DataContext";
 import { Message } from "models/Message";
-import { useContext } from "react";
 
 interface MessageBubbleProps {
     message: Message
     endUserBlock?: boolean 
     startUserBlock?: boolean
     senderDisplayName?: string
+    displayColor?: string
 }
 
 const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
@@ -22,7 +21,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
 
     return (
         <>
-            <div className={`flex w-full justify-start border-l-2 border-red-500 font-regular`}>
+            <div className={`flex w-full justify-start border-l-2 font-regular`} style={{borderColor: props.displayColor}}>
                 <div className={`flex max-w-[80vw] px-2`}>
                     <p>{props.message.message}</p>
                     {/* <p>ID:   {props.message._id}</p> */}

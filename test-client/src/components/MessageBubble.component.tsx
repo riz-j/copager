@@ -22,11 +22,9 @@ const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
 
     return (
         <>
-            { props.startUserBlock && <p>{props.senderDisplayName}</p>} 
             <div className={`flex w-full ${alignment}`}>
                 <div className={
                     `flex my-[0.1rem] max-w-[80vw] py-2 px-3 
-                    ${props.startUserBlock && "mt-2"}
                     ${textColor} 
                     ${bgColor} 
                     ${textAlignment} 

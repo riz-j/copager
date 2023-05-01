@@ -13,8 +13,8 @@ function App() {
     <>
       <div>
         <__sampleLogin__/>
-        <__userBuilderDemo__/>
-        <__messageDataContext/>
+        {/* <__userBuilderDemo__/> */}
+        {/* <__messageDataContext/> */}
         <DashboardWrapper>
           <ChatFeed/>
           <ChatBox/>

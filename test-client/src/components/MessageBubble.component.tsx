@@ -24,7 +24,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
         <>
             <div className={`flex w-full ${alignment}`}>
                 <div className={
-                    `flex my-[0.1rem] max-w-[80vw] py-2 px-3 
+                    `flex my-[0.08rem] max-w-[80vw] py-2 px-3 
                     ${textColor} 
                     ${bgColor} 
                     ${textAlignment} 

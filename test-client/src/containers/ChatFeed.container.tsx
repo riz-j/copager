@@ -35,10 +35,10 @@ const ChatFeed: React.FC = () => {
 
                     if (prevMsg) {
                         if (prevMsg.sender !== msg.sender) {
-                            /** Start of a new user block */
+                            /** Start of a new user chat block */
                             return (
                                 <div className={`flex flex-col ${isCurrentUser ? "items-end" : "items-start"}`}>
-                                    <p className="mt-2 mx-1 text-sm text-gray-500">{senderDisplayName}</p>
+                                    <p className="mt-2 mb-1 mx-1 text-sm text-gray-500">{senderDisplayName}</p>
                                     <MessageBubble 
                                         key={msg._id} 
                                         message={msg} 
@@ -51,7 +51,7 @@ const ChatFeed: React.FC = () => {
                     if (nextMsg) {
 
                         if (nextMsg.sender !== msg.sender) {
-                            /** End of a new user block */
+                            /** End of a user chat block */
                             return <MessageBubble key={msg._id} message={msg} endUserBlock={true} />
                         }
                     }

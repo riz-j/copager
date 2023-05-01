@@ -4,6 +4,8 @@ import { useContext } from "react";
 
 interface MessageBubbleProps {
     message: Message
+    endUserBlock?: boolean 
+    startUserBlock?: boolean
 }
 
 const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
@@ -16,17 +18,20 @@ const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
     const textColor: string = isCurrentUser ? "text-white" : "text-black";
 
     return (
-        <div className={`flex w-full ${alignment}`}>
-            <div className={`flex my-[0.1rem] max-w-[80vw] py-2 px-3 rounded-xl ${textColor} ${bgColor} ${textAlignment}`}>
-                <p>{props.message.message}</p>
-                {/* <p>ID:   {props.message._id}</p> */}
-                {/* <p>Type:   {props.message.type}</p> */}
-                {/* <p>Message:   {props.message.message}</p>  */}
-                {/* <p>Timestamp:   {props.message.timestamp}</p>  */}
-                {/* <p>Sender:   {props.message.sender}</p>  */}
-                {/* <p>Room:   {props.message.room}</p>  */}
+        <>
+            { props.startUserBlock && <div className="h-2" />}
+            <div className={`flex w-full ${alignment}`}>
+                <div className={`flex my-[0.1rem] max-w-[80vw] py-2 px-3 rounded-xl ${textColor} ${bgColor} ${textAlignment}`}>
+                    <p>{props.message.message}</p>
+                    {/* <p>ID:   {props.message._id}</p> */}
+                    {/* <p>Type:   {props.message.type}</p> */}
+                    {/* <p>Message:   {props.message.message}</p>  */}
+                    {/* <p>Timestamp:   {props.message.timestamp}</p>  */}
+                    {/* <p>Sender:   {props.message.sender}</p>  */}
+                    {/* <p>Room:   {props.message.room}</p>  */}
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

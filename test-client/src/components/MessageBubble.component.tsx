@@ -22,13 +22,9 @@ const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
 
     return (
         <>
-            <div className={`flex w-full ${alignment}`}>
+            <div className={`flex w-full justify-start border-l-2 border-red-500`}>
                 <div className={
-                    `flex my-[0.08rem] max-w-[80vw] py-2 px-3 
-                    ${textColor} 
-                    ${bgColor} 
-                    ${textAlignment} 
-                    ${isCurrentUser ? selfBorderRadius : othersBorderRadius}
+                    `flex my-[0.08rem] max-w-[80vw] px-3 
                 `}>
                     <p>{props.message.message}</p>
                     {/* <p>ID:   {props.message._id}</p> */}

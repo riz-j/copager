@@ -43,8 +43,8 @@ export const DataProvider = ({ children }: DataContextProps) => {
                     const loadedMessages = dataParcel.messages;
                     return { ...prevData, 
                         currentUser: loadedCurrentUser, 
-                        users: loadedUsers, 
-                        messages: loadedMessages
+                        users: [...prevData.users, ...loadedUsers], 
+                        messages: [...prevData.messages, ...loadedMessages]
                     }
                 })
             })

@@ -10,22 +10,20 @@ interface MessageBubbleProps {
 }
 
 const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
-    const currentUserId: string = useContext(DataContext).currentUser._id;
-    const isCurrentUser: boolean = currentUserId === props.message.sender;
     
-    const alignment: string = isCurrentUser ? "justify-end" : "justify-start";
-    const textAlignment: string = isCurrentUser ? "justify-end" : "justify start";
-    const bgColor: string = isCurrentUser ? "bg-blue-600" : "bg-gray-200";
-    const textColor: string = isCurrentUser ? "text-white" : "text-black";
-    const selfBorderRadius: string = props.startUserBlock ? "rounded-l-xl rounded-tr-xl rounded-br-md" : "rounded-l-xl rounded-r-md";
-    const othersBorderRadius: string = props.startUserBlock ? "rounded-r-xl rounded-tl-xl rounded-bl-md" : "rounded-r-xl rounded-l-md";
+    // const currentUserId: string = useContext(DataContext).currentUser._id;
+    // const isCurrentUser: boolean = currentUserId === props.message.sender;
+    // const alignment: string = isCurrentUser ? "justify-end" : "justify-start";
+    // const textAlignment: string = isCurrentUser ? "justify-end" : "justify start";
+    // const bgColor: string = isCurrentUser ? "bg-blue-600" : "bg-gray-200";
+    // const textColor: string = isCurrentUser ? "text-white" : "text-black";
+    // const selfBorderRadius: string = props.startUserBlock ? "rounded-l-xl rounded-tr-xl rounded-br-md" : "rounded-l-xl rounded-r-md";
+    // const othersBorderRadius: string = props.startUserBlock ? "rounded-r-xl rounded-tl-xl rounded-bl-md" : "rounded-r-xl rounded-l-md";
 
     return (
         <>
-            <div className={`flex w-full justify-start border-l-2 border-red-500`}>
-                <div className={
-                    `flex my-[0.08rem] max-w-[80vw] px-3 
-                `}>
+            <div className={`flex w-full justify-start border-l-2 border-red-500 font-regular`}>
+                <div className={`flex max-w-[80vw] px-2`}>
                     <p>{props.message.message}</p>
                     {/* <p>ID:   {props.message._id}</p> */}
                     {/* <p>Type:   {props.message.type}</p> */}

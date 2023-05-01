@@ -38,7 +38,7 @@ const ChatFeed: React.FC = () => {
                             /** Start of a new user chat block */
                             return (
                                 <div className={`flex flex-col items-start`}>
-                                    <p className="mt-3 mb-1 text-sm text-red-500">{senderDisplayName} {isCurrentUser ? "(You)" : ""}</p>
+                                    <p className="mt-3 mb-1 text-sm font-medium text-red-500">{senderDisplayName} {isCurrentUser ? "(You)" : ""}</p>
                                     <MessageBubble 
                                         key={msg._id} 
                                         message={msg} 

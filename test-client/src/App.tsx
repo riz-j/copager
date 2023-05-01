@@ -12,7 +12,7 @@ import ChatHeader from 'containers/ChatHeader.container';
 function App() {
   return (
     <>
-      <div className=''>
+      <div>
         {/* <__sampleLogin__/> */}
         {/* <__userBuilderDemo__/> */}
         {/* <__messageDataContext/> */}

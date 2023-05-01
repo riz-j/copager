@@ -15,7 +15,6 @@ const ChatFeed: React.FC = () => {
 
     return (
         <>
-            {/* Insert "bg-red-100" below to debug */}
             <div className="absolute bottom-0 pb-24 pt-5 px-4 h-full w-full overflow-y-scroll">
                 { messages.map((msg, index) => {
                     const prevMsg = index > 0 ? messages[index - 1] : null;
@@ -33,7 +32,7 @@ const ChatFeed: React.FC = () => {
                     }
                     return <MessageBubble key={msg._id} message={msg} />
                 }) }
-                <div ref={bottom}></div>
+                <div ref={bottom} />
             </div>
         </>
     )

@@ -16,12 +16,21 @@ const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
     const textAlignment: string = isCurrentUser ? "justify-end" : "justify start";
     const bgColor: string = isCurrentUser ? "bg-blue-600" : "bg-gray-200";
     const textColor: string = isCurrentUser ? "text-white" : "text-black";
+    const selfBorderRadius: string = props.startUserBlock ? "rounded-l-lg rounded-tr-lg rounded-br-md" : "rounded-l-lg";
+    const othersBorderRadius: string = props.startUserBlock ? "rounded-r-lg rounded-tl-lg rounded-bl-md" : "rounded-r-lg";
 
     return (
         <>
-            { props.startUserBlock && <div className="h-2" />}
+            {/* { props.startUserBlock && <div className="h-2" />} */}
             <div className={`flex w-full ${alignment}`}>
-                <div className={`flex my-[0.1rem] max-w-[80vw] py-2 px-3 rounded-xl ${textColor} ${bgColor} ${textAlignment}`}>
+                <div className={
+                    `flex my-[0.1rem] max-w-[80vw] py-2 px-3 
+                    ${props.startUserBlock && "mt-2"}
+                    ${textColor} 
+                    ${bgColor} 
+                    ${textAlignment} 
+                    ${isCurrentUser ? selfBorderRadius : othersBorderRadius}
+                `}>
                     <p>{props.message.message}</p>
                     {/* <p>ID:   {props.message._id}</p> */}
                     {/* <p>Type:   {props.message.type}</p> */}

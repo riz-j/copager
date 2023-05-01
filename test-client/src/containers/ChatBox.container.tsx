@@ -36,7 +36,6 @@ const ChatBox: React.FC = () => {
 
     return (
         <>
-            {/* Insert "bg-green-100" below to debug */}
             <div className="fixed bottom-0 right-0 w-full h-20 backdrop-filter bg-white/80 backdrop-blur-lg z-20">
                 <div className="flex justify-around items-center h-full w-full">
                     <input

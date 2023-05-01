@@ -5,6 +5,7 @@ from typing import Optional, List
 class UserVM():
     _id: str
     displayName: str
+    displayColor: str
     profilePic: Optional[str] = None
     profileStatus: Optional[str] = None
     # guest: bool ???

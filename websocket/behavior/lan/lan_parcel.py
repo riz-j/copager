@@ -7,6 +7,9 @@ from model.Guest import Guest
 from model.User import User
 from model.Message import Message
 from model.view_model.UserVM import UserVM
+from utils.colors import colors
+from utils.names import prefixes, nouns
+import random
 
 rooms = db["rooms"]
 users = db["users"]
@@ -29,7 +32,8 @@ async def on_request_lan_parcel(sid):
         # Create new guest
         new_user = Guest(
                 _id = user_id,
-                displayName="Homer Simpson"
+                displayName = f"{prefixes[random.randint(0,19)]} {nouns[random.randint(0,19)]}", 
+                displayColor = colors[random.randint(0,17)]
                 )
         # Upload new user object to database
         ack = users.insert_one(asdict(new_user))
@@ -61,6 +65,7 @@ async def on_request_lan_parcel(sid):
         lan_user_vm = UserVM(
             _id = lan_user.get("_id"),
             displayName = lan_user.get("displayName"),
+            displayColor= lan_user.get("displayColor"),
             profilePic = lan_user.get("profilePic"),
             profileStatus = lan_user.get("profileStatus")
         )  
@@ -74,6 +79,7 @@ async def on_request_lan_parcel(sid):
     current_user_vm = UserVM(
         _id = current_user.get("_id"),
         displayName = current_user.get("displayName"),
+        displayColor = current_user.get("displayColor"),
         profilePic = current_user.get("profilePic"),
         profileStatus = current_user.get("profileStatus")
     )

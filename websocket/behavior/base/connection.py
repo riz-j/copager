@@ -3,6 +3,9 @@ from data.database import db
 from urllib.parse import parse_qs
 from dataclasses import asdict
 from utils.connection_manager import ConnectionManager
+from utils.colors import colors
+from utils.names import prefixes, nouns
+import random
 
 from model.Guest import Guest
 
@@ -28,8 +31,9 @@ async def connect(sid, environ):
     if user is None:
         # Create a new user as Guest 
         new_user = Guest(
-            _id=user_id,
-            displayName=user_id # REPLACE: with random name generator
+            _id = user_id,
+            displayName = f"{prefixes[random.randint(0,19)]} {nouns[random.randint(0,19)]}", 
+            displayColor = colors[random.randint(0,17)]
         )
 
         # Insert new user into database

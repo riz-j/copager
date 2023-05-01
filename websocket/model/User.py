@@ -6,6 +6,7 @@ class User():
     _id: str
     displayName: str
     email: str
+    displayColor: str
     profilePic: Optional[str] = None
     profileStatus: Optional[str] = None
 

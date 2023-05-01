@@ -5,6 +5,7 @@ from typing import Optional, List
 class Guest():
     _id: str
     displayName: str
+    displayColor: str
     
 
 # In the future, a Guest can be transformed into a User (a logged in User).

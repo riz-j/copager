@@ -41,7 +41,6 @@ export const DataProvider = ({ children }: DataContextProps) => {
                 setData(prevData => {
                     const loadedCurrentUser = dataParcel.currentUser;
                     const loadedUsers = dataParcel.users;
-                    console.log(`LOADED USERSSS: ${JSON.stringify(loadedUsers)}`);
                     const loadedMessages = dataParcel.messages;
                     return { 
                         ...prevData, 

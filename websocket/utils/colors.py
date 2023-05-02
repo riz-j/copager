@@ -14,7 +14,7 @@ colors = [
     '#fde047',
 
     # Lime
-    '#a3e635',
+    '#65a30d',
 
     # Green
     '#4ade80',

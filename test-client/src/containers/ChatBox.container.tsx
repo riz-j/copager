@@ -38,7 +38,7 @@ const ChatBox: React.FC = () => {
 
     return (
         <>
-            <div className="fixed justify-around px-5 bottom-0 right-0 w-full h-20 
+            <div className=" justify-around px-5  w-full h-20 
                             border-t border-gray-200 backdrop-filter bg-white/80 
                             backdrop-blur-lg z-20">
                 <div className="flex justify-around items-center h-full w-full">

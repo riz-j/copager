@@ -6,15 +6,19 @@ const Dashboard: React.FC = () => {
     return (
         <>
             <div className="flex">
-                <div className="fixed h-screen bg-red-500 w-96">
+                <div className="fixed h-screen bg-red-500 w-96 hidden 
+                                md:block">  {/** For Desktop and Tablets */}
                     <p>Hello</p>
                 </div>
-                <div className="flex flex-col w-full ml-96">
-                    <div className="flex-1 relative">
-                        <ChatFeed/> {/** This has position relative */}
+                <div className="flex flex-col w-full 
+                                md:ml-96"> 
+                    <div className="relative flex-1">
+                        <ChatFeed/> 
                     </div>
-                    <div className="fixed left-96 bottom-0 right-0">
-                        <ChatBox/> {/** This has position fixed and width 100% */}
+                    
+                    <div className="fixed bottom-0 right-0 w-full
+                                    md:left-96 md:w-auto"> 
+                        <ChatBox/> 
                     </div>
                 </div>
             </div>

@@ -27,7 +27,7 @@ const ChatFeed: React.FC = () => {
 
     return (
         <>
-            <div className="relative bottom-0 pb-24 pt-5 px-4 h-full w-full overflow-y-scroll bg-gray-100">
+            <div className="bottom-0 pb-24 pt-5 px-4 h-full w-full overflow-y-scroll bg-gray-100">
                 { messages.map((msg, index) => {
                     const prevMsg = index > 0 ? messages[index - 1] : null;
                     const nextMsg = index < (messages.length - 1) ? messages[index + 1] : null;

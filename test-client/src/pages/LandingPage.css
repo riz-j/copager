@@ -9,9 +9,9 @@
 }
 
 .bg-canvas {
-  background-image: radial-gradient(#67e8f9 5%, transparent 0%);
+  background-image: radial-gradient(#0ea5e9 8%, transparent 0%);
   /*radial-gradient(#ef4444 3%, transparent 0%)*/
-  background-color: #ffffff;
+  background-color: #0ea5e9;
   background-position: 0 0, 50px 50px;
   background-size: 50px 50px;
 }

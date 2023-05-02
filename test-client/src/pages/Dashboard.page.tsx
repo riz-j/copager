@@ -1,14 +1,15 @@
 import ChatBox from "containers/ChatBox.container";
 import ChatFeed from "containers/ChatFeed.container";
 import ChatHeader from "containers/ChatHeader.container";
+import NavMenu from "containers/NavMenu.container";
 
 const Dashboard: React.FC = () => {
     return (
         <>
             <div className="flex">
-                <div className="fixed h-screen bg-red-500 hidden 
+                <div className="fixed h-screen hidden 
                                 lg:block lg:w-96">  {/** For Desktop and Horizontal Tablets */}
-                    <p>Hello</p>
+                    <NavMenu/>
                 </div>
                 <div className="flex flex-col w-full 
                                 lg:ml-96"> 

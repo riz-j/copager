@@ -77,7 +77,7 @@ async def disconnect(sid):
             user = users.find_one({"_id": user_id})
 
             # notify everyone else in the room that the user has left
-            if user:
+            if user is not None:
                 iso_string = datetime.utcnow().isoformat(); 
                 uuid_string = str(uuid4())
                 notice = Message(

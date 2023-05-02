@@ -2,9 +2,12 @@ from server import sio
 from data.database import db
 from urllib.parse import parse_qs
 from dataclasses import asdict
+from model.Message import Message
 from utils.connection_manager import ConnectionManager
 from utils.colors import colors
 from utils.names import prefixes, nouns
+from datetime import datetime
+from uuid import uuid4
 import random
 
 from model.Guest import Guest
@@ -62,16 +65,35 @@ async def disconnect(sid):
     connection_manager = ConnectionManager()
     connection_manager.remove_connection(sid)
 
+
+    # Check if the user's other sessions still exist 
+    other_sessions_exist = connection_manager.session_exists(user_id)
+    
+    # # Check if user_id and lan_room contains values
+    if user_id and lan_room:
+        
+        if other_sessions_exist == False:
+            # Get user details
+            user = users.find_one({"_id": user_id})
+
+            # notify everyone else in the room that the user has left
+            if user:
+                iso_string = datetime.utcnow().isoformat(); 
+                uuid_string = str(uuid4())
+                notice = Message(
+                    _id = uuid_string,
+                    type = "user_join_notice",
+                    message = user.get("displayName") + " left the chat",
+                    timestamp = iso_string,
+                    sender = "server",
+                    room = lan_room
+                )
+                notice_dict = asdict(notice)
+
+                await sio.emit("onMessage", notice_dict, room=lan_room)
     # --------------------------------------------------
     # Remove User ID reference fom the lan_room document
     # --------------------------------------------------
-    # Check if the user's other sessions still exist 
-    # other_sessions_exist = connection_manager.session_exists(user_id)
-    
-    # # Check if user_id and lan_room contains values
-    # if user_id and lan_room:
-        
-    #     if other_sessions_exist == False:
     #         # Remove user ID reference from the LAN room document in the database
     #         ack = rooms.update_one({"_id": lan_room}, {"$pull": {"users": user_id}})
             

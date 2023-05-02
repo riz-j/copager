@@ -1,4 +1,5 @@
 import MessageBubble from "components/MessageBubble.component";
+import NoticeMessage from "components/NoticeMessage.component";
 import { DataContext } from "contexts/DataContext";
 import { IUser } from "models/interfaces/IUser";
 import { useContext, useEffect, useRef } from "react";
@@ -34,41 +35,54 @@ const ChatFeed: React.FC = () => {
                     const sender: IUser = users.find(user => user._id === msg.sender) || {} as IUser;
                     const senderDisplayName: string = sender.displayName || "unkown";
                     const senderDisplayColor: string = sender.displayColor || "#ef4444";
+                    
+                    if (msg.type === "text") {
 
-                    if (prevMsg) {
-                        if (prevMsg.sender !== msg.sender) {
-                            /** Start of a new user chat block */
-                            return (
-                                <div className={`flex flex-col items-start`}>
-                                    <p className="mt-3 mb-1 text-sm font-medium" style={{color: senderDisplayColor}}>{senderDisplayName} {isCurrentUser ? "(Me)" : ""}</p>
-                                    <MessageBubble 
-                                        key={msg._id} 
-                                        message={msg} 
-                                        displayColor={senderDisplayColor}
-                                        startUserBlock={true} 
-                                    />
-                                </div>
-                            )
+                        if (prevMsg) {
+                            if (prevMsg.sender !== msg.sender) {
+                                /** Start of a new user chat block */
+                                return (
+                                    <div className={`flex flex-col items-start`}>
+                                        <p className="mt-3 mb-1 text-sm font-medium" style={{color: senderDisplayColor}}>{senderDisplayName} {isCurrentUser ? "(Me)" : ""}</p>
+                                        <MessageBubble 
+                                            key={msg._id} 
+                                            message={msg} 
+                                            displayColor={senderDisplayColor}
+                                            startUserBlock={true} 
+                                        />
+                                    </div>
+                                )
+                            }
                         }
-                    }
-                    if (nextMsg) {
+                        if (nextMsg) {
 
-                        if (nextMsg.sender !== msg.sender) {
-                            /** End of a user chat block */
-                            return <MessageBubble 
-                                key={msg._id} 
-                                message={msg} 
-                                endUserBlock={true} 
-                                displayColor={senderDisplayColor} 
+                            if (nextMsg.sender !== msg.sender) {
+                                /** End of a user chat block */
+                                return <MessageBubble 
+                                    key={msg._id} 
+                                    message={msg} 
+                                    endUserBlock={true} 
+                                    displayColor={senderDisplayColor} 
+                                />
+                            }
+                        }
+                        return <MessageBubble 
+                            key={msg._id} 
+                            message={msg}
+                            displayColor={senderDisplayColor}
+                        />
+                    }
+
+                    if (msg.type === "user_join_notice") {
+                        return (
+                            <NoticeMessage
+                                key={msg._id}
+                                message={msg}
                             />
-                        }
+                        )
                     }
-                    return <MessageBubble 
-                        key={msg._id} 
-                        message={msg}
-                        displayColor={senderDisplayColor}
-                    />
                 }) }
+            
                 <div ref={bottom} />
             </div>
         </>

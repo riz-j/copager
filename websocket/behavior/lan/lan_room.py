@@ -1,10 +1,14 @@
 from server import sio 
 from data.database import db
 from model.Room import Room
+from model.Message import Message
 from model.view_model.UserVM import UserVM
 from utils.connection_manager import ConnectionManager
 from dataclasses import asdict
 from typing import List
+from datetime import datetime
+from uuid import uuid4
+import json
 
 rooms = db["rooms"]
 messages = db["messages"]
@@ -74,8 +78,20 @@ async def on_join_lan_room(sid):
             # Send the user info as a parcel to everyone in the room
             await sio.emit("onParcel", parcel, room=lan_room)
 
-            # Inform everyone else in the room that a user has joined 
-            # ----- TO DO ------
+            # Inform everyone else in the room that a user has joined
+            iso_string = datetime.utcnow().isoformat(); 
+            uuid_string = str(uuid4())
+            notice = Message(
+                _id = uuid_string,
+                type = "user_join_notice",
+                message = f"{user_vm.displayName} joined the chat",
+                timestamp = iso_string,
+                sender = "server",
+                room = lan_room
+            )
+            notice_dict = asdict(notice)
+
+            await sio.emit("onMessage", notice_dict, room=lan_room)
 
 
         

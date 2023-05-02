@@ -4,8 +4,8 @@
   font-family: "Poppins", sans-serif;
 }
 
-@media screen and (min-width: 1024px) {
-  .shadow-solid-lg-screen {
+@media screen and (min-width: 768px) {
+  .shadow-solid-md-screen {
     box-shadow: 6px 6px #000000;
   }
 }

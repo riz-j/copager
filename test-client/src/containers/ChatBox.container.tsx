@@ -2,6 +2,9 @@ import { useContext, useState } from "react";
 import { SocketContext } from "contexts/SocketContext";
 import { Message } from "models/Message";
 import { MessageBuilder } from "builders/MessageBuilder";
+import send_black from "assets/send-black.png";
+import send_blue from "assets/send-blue.png";
+import send_gray from "assets/send-gray.png";
 
 const ChatBox: React.FC = () => {
     const socket = useContext(SocketContext);
@@ -36,15 +39,26 @@ const ChatBox: React.FC = () => {
 
     return (
         <>
-            <div className="fixed bottom-0 right-0 w-full h-20 backdrop-filter bg-white/80 backdrop-blur-lg z-20">
+            <div className="fixed justify-around px-5 bottom-0 right-0 w-full h-20 
+                            border-t border-gray-200 backdrop-filter bg-white/80 
+                            backdrop-blur-lg z-20">
                 <div className="flex justify-around items-center h-full w-full">
                     <input
                         value={input}
                         onKeyDown={handleKeyDown}
                         onChange={(e) => setInput(e.target.value)}
-                        className="border-2 border-slate-500 rounded-lg p-2"
+                        className="w-full border-2 rounded-full py-2 px-4 border-slate-500 
+                                focus:border-blue-500 focus:outline-none"
                     />
-                    <button onClick={handleSendMessage}>Send</button>
+                    <button 
+                        onClick={handleSendMessage}
+                        className="ml-1 p-2"
+                    >
+                        <img 
+                            src={input ? send_blue : send_gray} 
+                            className="w-6 h-6" 
+                        />
+                    </button>
                 </div>
             </div>
         </>

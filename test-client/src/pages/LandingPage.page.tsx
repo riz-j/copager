@@ -13,7 +13,7 @@ const LandingPage: React.FC = () => {
                         copager
                     </h1>
                 </div>
-                <div className={`flex flex-col justify-center items-center ${debug && "bg-rose-100"} h-[26rem] text-center lg:bg-white lg:rounded-2xl lg:p-10 lg:border-4 lg:border-black shadow-solid-lg-screen`}>
+                <div className={`flex flex-col justify-center items-center ${debug && "bg-rose-100"} h-[26rem] text-center lg:bg-white lg:rounded-2xl lg:p-10 lg:border-4 lg:border-black lg:w-[53rem] shadow-solid-lg-screen`}>
                     <h1 className="text-4xl font-bold bg-lime-200 px-5 lg:text-5xl lg:bg-white">
                         Chat with People <span className='text-purple-600'>Connected</span> to the same <span className='text-purple-600'>Wifi</span> as you
                     </h1>

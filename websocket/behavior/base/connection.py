@@ -61,20 +61,23 @@ async def disconnect(sid):
     connection_manager = ConnectionManager()
     connection_manager.remove_connection(sid)
 
-    # Check if the user's other sessions still exist
-    other_sessions_exist = connection_manager.session_exists(user_id)
+    # --------------------------------------------------
+    # Remove User ID reference fom the lan_room document
+    # --------------------------------------------------
+    # Check if the user's other sessions still exist 
+    # other_sessions_exist = connection_manager.session_exists(user_id)
     
-    # Check if user_id and lan_room contains values
-    if user_id and lan_room:
+    # # Check if user_id and lan_room contains values
+    # if user_id and lan_room:
         
-        if other_sessions_exist == False:
-            # Remove user ID reference from the LAN room document in the database
-            ack = rooms.update_one({"_id": lan_room}, {"$pull": {"users": user_id}})
+    #     if other_sessions_exist == False:
+    #         # Remove user ID reference from the LAN room document in the database
+    #         ack = rooms.update_one({"_id": lan_room}, {"$pull": {"users": user_id}})
             
-            if ack.acknowledged == False:
-                raise Exception("Failed to remove User ID reference out of the LAN room document")
+    #         if ack.acknowledged == False:
+    #             raise Exception("Failed to remove User ID reference out of the LAN room document")
 
-            print(user_id + " left the room " + lan_room)
+    #         print(user_id + " left the room " + lan_room)
     
     print(f"{user_id} disconnected")
 

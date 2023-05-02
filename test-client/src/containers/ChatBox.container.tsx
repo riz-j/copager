@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { SocketContext } from "contexts/SocketContext";
 import { Message } from "models/Message";
 import { MessageBuilder } from "builders/MessageBuilder";
-import send_black from "assets/send-black.png";
 import send_blue from "assets/send-blue.png";
 import send_gray from "assets/send-gray.png";
 

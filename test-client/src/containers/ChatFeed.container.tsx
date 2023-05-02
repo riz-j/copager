@@ -42,7 +42,7 @@ const ChatFeed: React.FC = () => {
                             if (prevMsg.sender !== msg.sender) {
                                 /** Start of a new user chat block */
                                 return (
-                                    <div className={`flex flex-col items-start`}>
+                                    <div className="flex flex-col items-start">
                                         <p className="mt-3 mb-1 text-sm font-medium" style={{color: senderDisplayColor}}>{senderDisplayName} {isCurrentUser ? "(Me)" : ""}</p>
                                         <MessageBubble 
                                             key={msg._id} 
@@ -66,6 +66,8 @@ const ChatFeed: React.FC = () => {
                                 />
                             }
                         }
+
+                        /** Middle of a user chat block */
                         return <MessageBubble 
                             key={msg._id} 
                             message={msg}
@@ -74,13 +76,13 @@ const ChatFeed: React.FC = () => {
                     }
 
                     if (msg.type === "user_join_notice") {
-                        return (
-                            <NoticeMessage
-                                key={msg._id}
-                                message={msg}
-                            />
-                        )
+                        /** Notification for when a user enters or leaves a room */
+                        return <NoticeMessage
+                            key={msg._id}
+                            message={msg}
+                        />
                     }
+
                 }) }
             
                 <div ref={bottom} />

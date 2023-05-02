@@ -37,14 +37,17 @@ export const DataProvider = ({ children }: DataContextProps) => {
         if (socket && pubLanRoom) {
                         
             socket.on("onParcel", (dataParcel: DataStore) => {
+                // console.log(dataParcel)
                 setData(prevData => {
                     const loadedCurrentUser = dataParcel.currentUser;
                     const loadedUsers = dataParcel.users;
+                    console.log(`LOADED USERSSS: ${JSON.stringify(loadedUsers)}`);
                     const loadedMessages = dataParcel.messages;
-                    return { ...prevData, 
-                        currentUser: loadedCurrentUser, 
-                        users: [...prevData.users, ...loadedUsers], 
-                        messages: [...prevData.messages, ...loadedMessages]
+                    return { 
+                        ...prevData, 
+                        currentUser: loadedCurrentUser ? loadedCurrentUser : prevData.currentUser, 
+                        users: loadedUsers ? [...prevData.users, ...loadedUsers] : prevData.users,
+                        messages: loadedMessages ? [...prevData.messages, ...loadedMessages] : prevData.messages
                     }
                 })
             })

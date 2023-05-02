@@ -23,3 +23,11 @@ class ConnectionManager:
             if connection["user_id"] == user_id:
                 return True
         return False
+    
+    @classmethod
+    def session_count(cls, user_id):
+        count = 0
+        for connection in cls.connections:
+            if connection["user_id"] == user_id:
+                count += 1
+        return count

@@ -21,6 +21,7 @@ async def connect(sid, environ):
     
     connection_manager = ConnectionManager()
     connection_manager.add_connection(sid, user_id)
+    # TO DO: Add the lan_room to the connection manager
 
     if user_id is None:
         return False

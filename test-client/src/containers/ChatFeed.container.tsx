@@ -27,7 +27,7 @@ const ChatFeed: React.FC = () => {
 
     return (
         <>
-            <div className="bottom-0 pb-24 pt-5 px-4 h-full w-full overflow-y-scroll bg-gray-100">
+            <div className="flex flex-col bottom-0 pb-24 pt-5 px-4 h-full w-full overflow-y-scroll bg-red-100">
                 { messages.map((msg, index) => {
                     const prevMsg = index > 0 ? messages[index - 1] : null;
                     const nextMsg = index < (messages.length - 1) ? messages[index + 1] : null;
@@ -84,8 +84,8 @@ const ChatFeed: React.FC = () => {
                     }
 
                 }) }
-            
-                <div ref={bottom} />
+
+                <div className="self-end h-20 bg-red-500" ref={bottom} >Je</div>
             </div>
         </>
     )

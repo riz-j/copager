@@ -11,7 +11,7 @@ const Dashboard: React.FC = () => {
                                 lg:block lg:w-96">  {/** For Desktop and Horizontal Tablets */}
                     <NavMenu/>
                 </div>
-                <div className="flex flex-col w-full 
+                <div className="flex flex-col w-full h-full mb-20
                                 lg:ml-96"> 
                     <div className="relative flex-1">
                         <ChatFeed/> 

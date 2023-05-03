@@ -10,8 +10,8 @@ colors = [
     '#f59e0b',
 
     # Yellow
-    '#eab308',
-    '#fde047',
+    '#ca8a04',
+    '#d97706',
 
     # Lime
     '#65a30d',

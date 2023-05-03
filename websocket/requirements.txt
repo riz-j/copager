@@ -1,8 +1,6 @@
 aiohttp
 python-socketio
 
-pydantic
-
 python-dotenv
 
 pymongo

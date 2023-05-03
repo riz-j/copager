@@ -28,3 +28,4 @@ dist-ssr
 
 # Docker
 Dockerfile
+docker-copager-react.sh

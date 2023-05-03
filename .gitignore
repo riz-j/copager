@@ -1,3 +1,9 @@
 file_tree.txt
 
 start_work.sh
+
+Dockerfile
+
+docker_copager_react.sh
+
+docker_copager_websocket.sh

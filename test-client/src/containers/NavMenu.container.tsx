@@ -1,9 +1,9 @@
 const NavMenu: React.FC = () => {
     return (
         <>
-            <div className="h-full w-full bg-red-200">
-                <div className="flex items-center p-5 w-full bg-green-200 h-16">
-                    <p>Aloha My Friends!</p>
+            <div className="h-full w-full bg-white border-r border-gray-200">
+                <div className="flex items-center p-5 w-full bg-white h-16 border-b border-gray-200">
+                    {/* <p>This sidebar is under construction</p> */}
                 </div>
             </div>
         </>

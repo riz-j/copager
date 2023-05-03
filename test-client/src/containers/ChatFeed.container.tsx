@@ -27,65 +27,67 @@ const ChatFeed: React.FC = () => {
 
     return (
         <>
-            <div className="flex flex-col bottom-0 pb-24 pt-5 px-4 h-full w-full overflow-y-scroll bg-red-100">
-                { messages.map((msg, index) => {
-                    const prevMsg = index > 0 ? messages[index - 1] : null;
-                    const nextMsg = index < (messages.length - 1) ? messages[index + 1] : null;
-                    const isCurrentUser: boolean = currentUser._id === msg.sender;
-                    const sender: IUser = users.find(user => user._id === msg.sender) || {} as IUser;
-                    const senderDisplayName: string = sender.displayName || "unkown";
-                    const senderDisplayColor: string = sender.displayColor || "#ef4444";
-                    
-                    if (msg.type === "text") {
+            <div className="flex flex-col bottom-0 pb-24 pt-5 px-4 h-full w-full overflow-y-scroll bg-gray-100 justify-between">
+                <div>
+                    { messages.map((msg, index) => {
+                        const prevMsg = index > 0 ? messages[index - 1] : null;
+                        const nextMsg = index < (messages.length - 1) ? messages[index + 1] : null;
+                        const isCurrentUser: boolean = currentUser._id === msg.sender;
+                        const sender: IUser = users.find(user => user._id === msg.sender) || {} as IUser;
+                        const senderDisplayName: string = sender.displayName || "unkown";
+                        const senderDisplayColor: string = sender.displayColor || "#ef4444";
+                        
+                        if (msg.type === "text") {
 
-                        if (prevMsg) {
-                            if (prevMsg.sender !== msg.sender) {
-                                /** Start of a new user chat block */
-                                return (
-                                    <div className="flex flex-col items-start">
-                                        <p className="mt-3 mb-1 text-sm font-medium" style={{color: senderDisplayColor}}>{senderDisplayName} {isCurrentUser ? "(Me)" : ""}</p>
-                                        <MessageBubble 
-                                            key={msg._id} 
-                                            message={msg} 
-                                            displayColor={senderDisplayColor}
-                                            startUserBlock={true} 
-                                        />
-                                    </div>
-                                )
+                            if (prevMsg) {
+                                if (prevMsg.sender !== msg.sender) {
+                                    /** Start of a new user chat block */
+                                    return (
+                                        <div className="flex flex-col items-start">
+                                            <p className="mt-3 mb-1 text-sm font-medium" style={{color: senderDisplayColor}}>{senderDisplayName} {isCurrentUser ? "(Me)" : ""}</p>
+                                            <MessageBubble 
+                                                key={msg._id} 
+                                                message={msg} 
+                                                displayColor={senderDisplayColor}
+                                                startUserBlock={true} 
+                                            />
+                                        </div>
+                                    )
+                                }
                             }
-                        }
-                        if (nextMsg) {
+                            if (nextMsg) {
 
-                            if (nextMsg.sender !== msg.sender) {
-                                /** End of a user chat block */
-                                return <MessageBubble 
-                                    key={msg._id} 
-                                    message={msg} 
-                                    endUserBlock={true} 
-                                    displayColor={senderDisplayColor} 
-                                />
+                                if (nextMsg.sender !== msg.sender) {
+                                    /** End of a user chat block */
+                                    return <MessageBubble 
+                                        key={msg._id} 
+                                        message={msg} 
+                                        endUserBlock={true} 
+                                        displayColor={senderDisplayColor} 
+                                    />
+                                }
                             }
+
+                            /** Middle of a user chat block */
+                            return <MessageBubble 
+                                key={msg._id} 
+                                message={msg}
+                                displayColor={senderDisplayColor}
+                            />
                         }
 
-                        /** Middle of a user chat block */
-                        return <MessageBubble 
-                            key={msg._id} 
-                            message={msg}
-                            displayColor={senderDisplayColor}
-                        />
-                    }
+                        if (msg.type === "user_join_notice") {
+                            /** Notification for when a user enters or leaves a room */
+                            return <NoticeMessage
+                                key={msg._id}
+                                message={msg}
+                            />
+                        }
 
-                    if (msg.type === "user_join_notice") {
-                        /** Notification for when a user enters or leaves a room */
-                        return <NoticeMessage
-                            key={msg._id}
-                            message={msg}
-                        />
-                    }
+                    }) }
+                </div>
 
-                }) }
-
-                <div className="self-end h-20 bg-red-500" ref={bottom} >Je</div>
+                <div ref={bottom} />
             </div>
         </>
     )

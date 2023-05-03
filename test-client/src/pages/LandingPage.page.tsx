@@ -30,12 +30,14 @@ const LandingPage: React.FC = () => {
                             <p className="font-bold text-white">OPEN CHAT</p>
                         </div>
                     </a>
-                    <div className="flex justify-center items-center gap-[0.4rem] bg-lime-200 border-2 border-black w-full h-12 shadow-solid-primary md:bg-white">
-                        <div className="pb-[0.1rem]">
-                            <img src={github_icon} className="h-5" />
+                    <a href="https://github.com/riz-j/copager" target="_blank">
+                        <div className="flex justify-center items-center gap-[0.4rem] bg-lime-200 border-2 border-black w-full h-12 shadow-solid-primary md:bg-white">
+                            <div className="pb-[0.1rem]">
+                                <img src={github_icon} className="h-5" />
+                            </div>
+                            <p className="font-bold text-black">VIEW ON GITHUB</p>
                         </div>
-                        <p className="font-bold text-black">VIEW ON GITHUB</p>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

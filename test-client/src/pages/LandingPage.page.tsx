@@ -1,7 +1,6 @@
 import "./LandingPage.css";
 import chat_icon from "assets/chat-lines.png";
 import github_icon from "assets/github-icon.png";
-import { Link } from "react-router-dom";
 
 const LandingPage: React.FC = () => {
   return (
@@ -23,12 +22,14 @@ const LandingPage: React.FC = () => {
                     people that are connected to the same wifi network as you.
                 </p>
                 <div className="flex flex-col w-full gap-4 bg-lime-200 px-5 md:px-[10vw] md:bg-white">
-                    <Link to="/chat" className="flex justify-center items-center gap-2 bg-purple-500 w-full h-12 border-2 border-black shadow-solid-primary">
-                        <div className="pb-[0.1rem]">
-                            <img src={chat_icon} className="h-[1.2rem]" />
+                    <a href="/chat">
+                        <div  className="flex justify-center items-center gap-2 bg-purple-500 w-full h-12 border-2 border-black shadow-solid-primary">
+                            <div className="pb-[0.1rem]">
+                                <img src={chat_icon} className="h-[1.2rem]" />
+                            </div>
+                            <p className="font-bold text-white">OPEN CHAT</p>
                         </div>
-                        <p className="font-bold text-white">OPEN CHAT</p>
-                    </Link>
+                    </a>
                     <div className="flex justify-center items-center gap-[0.4rem] bg-lime-200 border-2 border-black w-full h-12 shadow-solid-primary md:bg-white">
                         <div className="pb-[0.1rem]">
                             <img src={github_icon} className="h-5" />

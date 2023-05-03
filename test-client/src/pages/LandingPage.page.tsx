@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 const LandingPage: React.FC = () => {
   return (
     <>
-        <div className="flex flex-col h-screen bg-lime-200 bg-canvas md:items-center md:px-56">
+        <div className="flex flex-col h-screen font-poppins bg-lime-200 bg-canvas md:items-center md:px-56">
             <div className="flex items-center h-28">
-                <h1 className="text-3xl font-bold mx-3 text-black bg-lime-200 p-8 md:text-4xl">
+                <h1 className="text-3xl font-bold font-poppins mx-3 text-black bg-lime-200 p-8 md:text-4xl">
                     copager
                 </h1>
             </div>

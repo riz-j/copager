@@ -71,7 +71,7 @@ async def on_request_lan_parcel(sid):
     for user_id in user_ids_cursor[0]["users"]:
         # Fetch the user document
         lan_user = users.find_one({"_id": user_id})
-        print("\nAJWNN\n" + user_id + "\nawejnanje\n")
+
         # Serialize the document to a UserVM
         lan_user_vm = UserVM(
             _id = lan_user.get("_id"),

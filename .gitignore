@@ -4,6 +4,8 @@ file_tree.txt
 
 start_work.sh
 
+websocket/server.py
+server.py
 
 docker_copager_react.sh
 

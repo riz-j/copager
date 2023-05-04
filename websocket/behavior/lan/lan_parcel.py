@@ -4,12 +4,13 @@ from server import sio
 from data.database import db
 from dataclasses import asdict
 from model.Guest import Guest
-from model.User import User
-from model.Message import Message
+from model.view_model.MessageVM import MessageVM
 from model.view_model.UserVM import UserVM
+from datetime import datetime
 from utils.colors import colors
 from utils.names import prefixes, nouns
 import random
+import json
 
 rooms = db["rooms"]
 users = db["users"]
@@ -46,11 +47,21 @@ async def on_request_lan_parcel(sid):
     current_user: Guest = users.find_one({"_id": user_id})
 
     # Fetch all messages in the lan_room 
-    lan_messages: List[Message] = []
+    lan_messages: List[MessageVM] = []
 
     messages_cursor = messages.find({"room": lan_room})
+
     for message in messages_cursor:
-        lan_messages.append(message)
+        timestamp_iso_str: str = message.get("timestamp").isoformat()
+        msg = MessageVM(
+            _id = message.get("_id"),
+            type = message.get("type"),
+            message = message.get("message"),
+            timestamp = timestamp_iso_str,
+            sender = message.get("sender"),
+            room = message.get("room")
+        )
+        lan_messages.append(asdict(msg))
 
 
     # Fetch all the users in the lan_room

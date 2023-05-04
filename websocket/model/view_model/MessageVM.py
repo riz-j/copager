@@ -1,12 +1,11 @@
 from dataclasses import dataclass
-from datetime import datetime
 
 @dataclass
-class Message():
+class MessageVM():
     _id: str 
     type: str
     message: str
-    timestamp: datetime
+    timestamp: str
 
     sender: str    # User ID
     room: str      # Room ID

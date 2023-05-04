@@ -1,8 +1,8 @@
 from server import sio 
 from data.database import db
 from model.Room import Room
-from model.Message import Message
 from model.view_model.UserVM import UserVM
+from model.view_model.MessageVM import MessageVM
 from utils.connection_manager import ConnectionManager
 from dataclasses import asdict
 from typing import List
@@ -79,13 +79,13 @@ async def on_join_lan_room(sid):
             await sio.emit("onParcel", parcel, room=lan_room)
 
             # Inform everyone else in the room that a user has joined
-            iso_string = datetime.utcnow().isoformat(); 
-            uuid_string = str(uuid4())
-            notice = Message(
+            datetime_now_iso: str = datetime.utcnow().isoformat()
+            uuid_string: str = str(uuid4())
+            notice = MessageVM(
                 _id = uuid_string,
                 type = "user_join_notice",
                 message = f"{user_vm.displayName} joined the chat",
-                timestamp = iso_string,
+                timestamp = datetime_now_iso,
                 sender = "server",
                 room = lan_room
             )

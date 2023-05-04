@@ -2,7 +2,7 @@ from server import sio
 from data.database import db
 from urllib.parse import parse_qs
 from dataclasses import asdict
-from model.Message import Message
+from model.view_model.MessageVM import MessageVM
 from utils.connection_manager import ConnectionManager
 from utils.colors import colors
 from utils.names import prefixes, nouns
@@ -78,9 +78,9 @@ async def disconnect(sid):
 
             # notify everyone else in the room that the user has left
             if user is not None:
-                iso_string = datetime.utcnow().isoformat(); 
-                uuid_string = str(uuid4())
-                notice = Message(
+                iso_string: str = datetime.utcnow().isoformat()
+                uuid_string: str = str(uuid4())
+                notice = MessageVM(
                     _id = uuid_string,
                     type = "user_join_notice",
                     message = user.get("displayName") + " left the chat",

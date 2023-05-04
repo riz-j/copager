@@ -1,6 +1,7 @@
 from server import sio 
 from data.database import db
 from dataclasses import asdict
+from datetime import datetime
 import pprint
 
 from model.Message import Message
@@ -10,7 +11,15 @@ messages = db["messages"]
 
 @sio.event
 async def on_message(sid, message):
-    msg = Message(**message)
+    # Convert to Message object that will be inserted into database
+    msg = Message(
+        _id = message.get("_id"),
+        type = message.get("type"),
+        message = message.get("message"),
+        timestamp = datetime.utcnow(),
+        sender = message.get("sender"),
+        room = message.get("room")
+    )
     
     # Check if destination room exists
     room = rooms.find_one({"_id": msg.room})

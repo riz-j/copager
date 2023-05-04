@@ -1,8 +1,9 @@
 file_tree.txt
 
+*.sh
+
 start_work.sh
 
-Dockerfile
 
 docker_copager_react.sh
 

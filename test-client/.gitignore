@@ -26,6 +26,5 @@ dist-ssr
 .env
 .env.local
 
-# Docker
-Dockerfile
+# Devops
 docker-copager-react.sh

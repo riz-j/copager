@@ -42,13 +42,18 @@ const ChatBox: React.FC = () => {
                             border-t border-gray-200 backdrop-filter bg-white/80 
                             backdrop-blur-lg z-20">
                 <div className="flex justify-around items-center h-full w-full">
-                    <input
-                        value={input}
-                        onKeyDown={handleKeyDown}
-                        onChange={(e) => setInput(e.target.value)}
-                        className="w-full border-2 rounded-full py-2 px-4 border-slate-500 
-                                focus:border-blue-500 focus:outline-none"
-                    />
+                    <div className="flex flex-col w-full h-full items-center justify-around">
+                        <input
+                            value={input}
+                            onKeyDown={handleKeyDown}
+                            onChange={(e) => setInput(e.target.value)}
+                            className="w-full border-2 rounded-full py-2 px-4 border-slate-500 
+                            focus:border-blue-500 focus:outline-none"
+                        />
+                        {/* <p className="text-xs text-gray-400">
+                            Messages will disappear after 24 hours
+                        </p> */}
+                    </div>
                     <button 
                         onClick={handleSendMessage}
                         className="ml-1 p-2"

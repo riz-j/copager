@@ -29,6 +29,11 @@ const ChatFeed: React.FC = () => {
         <>
             <div className="flex flex-col bottom-0 pb-24 pt-5 px-4 h-full w-full overflow-y-scroll bg-gray-100 justify-between">
                 <div>
+                    <div className="flex items-center w-full mt-3">
+                        <p className="text-gray-500 text-sm">
+                            Messages will disappear after 24 hours
+                        </p>
+                    </div>
                     { messages.map((msg, index) => {
                         const prevMsg = index > 0 ? messages[index - 1] : null;
                         const nextMsg = index < (messages.length - 1) ? messages[index + 1] : null;

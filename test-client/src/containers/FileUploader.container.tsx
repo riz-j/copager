@@ -1,14 +1,21 @@
 import FileUploadBox from "components/FileUploadBox.component"
-import { ChangeEvent, useState, useEffect } from "react";
+import { ChangeEvent, useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { SocketContext } from "contexts/SocketContext";
+import { MessageBuilder } from "builders/MessageBuilder";
+import { Message } from "models/Message";
 
 interface ApiResponse {
     message: string
-    url: string
+    URL: string
 }
 
 const FileUploader: React.FC = () => {
+    const socket = useContext(SocketContext);
     const fileUploaderUrl: string = import.meta.env.VITE_FILE_UPLOADER;
+    const currentUserId: string | null = localStorage.getItem('currentUserId');
+    const pubLanRoom: string | null = localStorage.getItem("pubLanRoom");
+
     const [file, setFile] = useState<File | null>(null);
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -50,11 +57,28 @@ const FileUploader: React.FC = () => {
     }
 
     useEffect(() => {
-        if (apiResStatus && apiResponse) {
+        if (apiResStatus && apiResponse && socket && currentUserId && pubLanRoom) {
             console.log("API Res Status: " + apiResStatus);
             console.log("API Response: " + JSON.stringify(apiResponse));
+
+            const fileUrl: string = apiResponse.URL;
+            
+            if (fileUrl) {
+                const _message: Message = new MessageBuilder()
+                    .setType("file")
+                    .setMessage(fileUrl)
+                    .setSender(currentUserId)
+                    .setRoom(pubLanRoom)
+                    .build()
+                    
+                try {
+                    socket.emit("on_message", _message);
+                } catch (err) {
+                    console.error("Failed to send file message to socket");
+                }
+            }
         }
-    }, [apiResStatus, apiResponse])
+    }, [apiResStatus, apiResponse, currentUserId, pubLanRoom])
 
     return (
         <FileUploadBox 

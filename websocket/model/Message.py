@@ -1,5 +1,6 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
+from typing import Optional
 
 @dataclass
 class Message():
@@ -10,3 +11,6 @@ class Message():
 
     sender: str    # User ID
     room: str      # Room ID
+
+    filename: Optional[str] = field(default=None)
+    url: Optional[str] = field(default=None)

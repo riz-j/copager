@@ -57,6 +57,8 @@ async def on_request_lan_parcel(sid):
             _id = message.get("_id"),
             type = message.get("type"),
             message = message.get("message"),
+            filename = message.get("filename"),
+            url = message.get("url"),
             timestamp = timestamp_iso_str,
             sender = message.get("sender"),
             room = message.get("room")

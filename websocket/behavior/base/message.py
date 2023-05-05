@@ -16,6 +16,8 @@ async def on_message(sid, message):
         _id = message.get("_id"),
         type = message.get("type"),
         message = message.get("message"),
+        filename = message.get("filename"),
+        url = message.get("url"),
         timestamp = datetime.utcnow(),
         sender = message.get("sender"),
         room = message.get("room")

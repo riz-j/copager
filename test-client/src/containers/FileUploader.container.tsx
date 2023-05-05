@@ -1,5 +1,4 @@
-import FileUploadBox from "components/FileUploadBox.component"
-import { ChangeEvent, useState, useEffect, useContext } from "react";
+import { ChangeEvent, useState, useEffect, useContext, DragEvent } from "react";
 import axios from "axios";
 import { SocketContext } from "contexts/SocketContext";
 import { MessageBuilder } from "builders/MessageBuilder";
@@ -17,6 +16,7 @@ const FileUploader: React.FC = () => {
     const pubLanRoom: string | null = localStorage.getItem("pubLanRoom");
 
     const [file, setFile] = useState<File | null>(null);
+    const [filename, setFilename] = useState<string>("");
 
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -56,6 +56,24 @@ const FileUploader: React.FC = () => {
         }
     }
 
+    const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            const inputFile = e.dataTransfer.files[0];
+            setFile(inputFile);
+            setFilename(inputFile.name);
+
+            console.log(inputFile);
+        }
+    }
+
     useEffect(() => {
         if (apiResStatus && apiResponse && socket && currentUserId && pubLanRoom) {
             console.log("API Res Status: " + apiResStatus);
@@ -81,12 +99,26 @@ const FileUploader: React.FC = () => {
     }, [apiResStatus, apiResponse, currentUserId, pubLanRoom])
 
     return (
-        <FileUploadBox 
-            serverUrl={fileUploaderUrl}
-            loading={loading}
-            onFileChange={handleFileChange}
-            onFileUpload={handleFileUpload}
-        />
+        <div className="bg-yellow-200">
+                <h1>Hello there</h1>
+                { loading && <h3>Loading...</h3> }
+                <div 
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                    className="p-10 bg-pink-200"
+                >
+                    <input 
+                        type="file" 
+                        onChange={handleFileChange}
+                    />
+                    <p>{filename ? filename : "Drop file here"}</p>
+                    
+                </div>
+                <button 
+                    onClick={handleFileUpload}
+                    className="border border-black hover:bg-green-500"
+                >Upload</button>
+            </div>
     )
 }
 

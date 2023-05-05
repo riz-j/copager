@@ -19,7 +19,6 @@ const FileUploader: React.FC = () => {
 
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-        //e.preventDefault();
         if (e.target.files) {
             setFile(e.target.files[0])
         }
@@ -31,6 +30,7 @@ const FileUploader: React.FC = () => {
             formData.append("file", file);
 
             try {
+                setLoading(true);
                 const response = await axios.post(
                     fileUploaderUrl, 
                     formData, 
@@ -38,6 +38,8 @@ const FileUploader: React.FC = () => {
                         'Content-Type': 'multipart/form-data'
                     }}
                 );
+                setLoading(false);
+
                 setApiResStatus(response.status);
                 setApiResponse(response.data);
 
@@ -57,6 +59,7 @@ const FileUploader: React.FC = () => {
     return (
         <FileUploadBox 
             serverUrl={fileUploaderUrl}
+            loading={loading}
             onFileChange={handleFileChange}
             onFileUpload={handleFileUpload}
         />

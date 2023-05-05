@@ -2,6 +2,7 @@ import { ChangeEvent } from "react";
 
 interface FileUploadBoxProps {
     serverUrl: string
+    loading: boolean
     onFileChange: (e: ChangeEvent<HTMLInputElement>) => void
     onFileUpload: () => void 
 }
@@ -11,6 +12,7 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = (props) => {
         <>
             <div className="bg-yellow-200">
                 <h1>Hello there</h1>
+                { props.loading && <h3>Loading...</h3> }
                 <input 
                     type="file" 
                     onChange={props.onFileChange}

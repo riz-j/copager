@@ -1,7 +1,7 @@
 // import ChatHeader from "containers/ChatHeader.container";
 import ChatBox from "containers/ChatBox.container";
 import ChatFeed from "containers/ChatFeed.container";
-import NavMenu from "containers/NavMenu.container";
+import LeftSidebar from "containers/LeftSidebar.container";
 
 const Dashboard: React.FC = () => {
     return (
@@ -9,7 +9,7 @@ const Dashboard: React.FC = () => {
             <div className="flex font-ibm-plex">
                 <div className="fixed h-screen hidden 
                                 lg:block lg:w-96">  {/** For Desktop and Horizontal Tablets */}
-                    <NavMenu/>
+                    <LeftSidebar/>
                 </div>
                 <div className="flex flex-col w-full h-screen pb-20
                                 lg:ml-96"> 

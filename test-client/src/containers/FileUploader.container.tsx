@@ -19,6 +19,7 @@ const FileUploader: React.FC = () => {
     const [filename, setFilename] = useState<string>("");
 
     const [loading, setLoading] = useState<boolean>(false);
+    const [dragOver, setDragOver] = useState<boolean>(false);
 
     /** API Response */
     const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
@@ -27,7 +28,9 @@ const FileUploader: React.FC = () => {
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            setFile(e.target.files[0])
+            const targetFile: File = e.target.files[0];
+            setFile(targetFile);
+            setFilename(targetFile.name);
         }
     }
 
@@ -50,6 +53,9 @@ const FileUploader: React.FC = () => {
                 setApiResStatus(response.status);
                 setApiResponse(response.data);
 
+                setFile(null);
+                setFilename("");
+
             } catch (err) {
                 console.log(err)
             }
@@ -59,11 +65,13 @@ const FileUploader: React.FC = () => {
     const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
+        setDragOver(true);
     }
     
     const handleDrop = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
+        setDragOver(false);
 
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
             const inputFile = e.dataTransfer.files[0];
@@ -104,15 +112,17 @@ const FileUploader: React.FC = () => {
                 { loading && <h3>Loading...</h3> }
                 <div 
                     onDragOver={handleDragOver}
+                    onMouseLeave={() => setDragOver(false)}
                     onDrop={handleDrop}
-                    className="p-10 bg-pink-200"
+                    className={`flex flex-col h-24 ${ dragOver ? 'bg-red-500' : 'bg-purple-400' }`}
                 >
                     <input 
                         type="file" 
                         onChange={handleFileChange}
+                        className="bg-green-200 w-full h-full opacity-0 cursor-pointer"
                     />
                     <p>{filename ? filename : "Drop file here"}</p>
-                    
+
                 </div>
                 <button 
                     onClick={handleFileUpload}

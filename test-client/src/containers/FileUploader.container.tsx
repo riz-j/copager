@@ -112,18 +112,18 @@ const FileUploader: React.FC = () => {
                 { loading && <h3>Loading...</h3> }
                 <div 
                     onDragOver={handleDragOver}
+                    onDragExit={() => setDragOver(false)}
                     onMouseLeave={() => setDragOver(false)}
                     onDrop={handleDrop}
-                    className={`flex flex-col h-24 ${ dragOver ? 'bg-red-500' : 'bg-purple-400' }`}
+                    className={`h-24 ${ dragOver ? 'bg-red-500' : 'bg-purple-400' }`}
                 >
                     <input 
                         type="file" 
                         onChange={handleFileChange}
                         className="bg-green-200 w-full h-full opacity-0 cursor-pointer"
                     />
-                    <p>{filename ? filename : "Drop file here"}</p>
-
                 </div>
+                <p>{filename ? filename : "Drop file here"}</p>
                 <button 
                     onClick={handleFileUpload}
                     className="border border-black hover:bg-green-500"

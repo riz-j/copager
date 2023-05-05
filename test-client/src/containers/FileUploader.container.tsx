@@ -1,8 +1,14 @@
-import { ChangeEvent, useState, useEffect, useContext, DragEvent } from "react";
-import axios from "axios";
+import { 
+    ChangeEvent, 
+    useState, 
+    useEffect, 
+    useContext, 
+    DragEvent 
+} from "react";
 import { SocketContext } from "contexts/SocketContext";
 import { MessageBuilder } from "builders/MessageBuilder";
 import { Message } from "models/Message";
+import axios from "axios";
 
 interface ApiResponse {
     message: string
@@ -18,12 +24,10 @@ const FileUploader: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);
     const [fileType, setFileType] = useState<string>("");
     const [filename, setFilename] = useState<string>("");
-    // const [fileUrl, setFileUrl] = useState<string>("");
 
     const [loading, setLoading] = useState<boolean>(false);
     const [dragOver, setDragOver] = useState<boolean>(false);
 
-    /** API Response */
     const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
     const [apiResStatus, setApiResStatus] = useState<number | null>(null);
 
@@ -49,7 +53,6 @@ const FileUploader: React.FC = () => {
             formData.append("file", file);
 
             try {
-                console.log("UPLOAD!!!")
                 setLoading(true);
                 const response = await axios.post(
                     fileUploaderUrl, 
@@ -90,7 +93,13 @@ const FileUploader: React.FC = () => {
     }
 
     useEffect(() => {
-        if (apiResStatus && apiResponse && socket && currentUserId && pubLanRoom && filename) {
+        if (apiResStatus && 
+            apiResponse && 
+            socket && 
+            currentUserId && 
+            pubLanRoom && 
+            filename
+        ) {
             console.log("API Res Status: " + apiResStatus);
             console.log("API Response: " + JSON.stringify(apiResponse));
 
@@ -110,7 +119,7 @@ const FileUploader: React.FC = () => {
                     socket.emit("on_message", _message);
 
                 } catch (err) {
-                    console.error("Failed to send file message to socket");
+                    console.error("Failed to send file message to websocket");
                 } finally {
                     setFile(null);
                     setFilename("");
@@ -120,7 +129,15 @@ const FileUploader: React.FC = () => {
 
             }
         }
-    }, [apiResStatus, apiResponse, currentUserId, pubLanRoom, filename, socket])
+    }, [
+        apiResStatus, 
+        apiResponse, 
+        currentUserId, 
+        pubLanRoom, 
+        filename, 
+        socket
+    ])
+
 
     return (
         <div className="bg-yellow-200">

@@ -16,7 +16,9 @@ const FileUploader: React.FC = () => {
     const pubLanRoom: string | null = localStorage.getItem("pubLanRoom");
 
     const [file, setFile] = useState<File | null>(null);
+    const [fileType, setFileType] = useState<string>("");
     const [filename, setFilename] = useState<string>("");
+    // const [fileUrl, setFileUrl] = useState<string>("");
 
     const [loading, setLoading] = useState<boolean>(false);
     const [dragOver, setDragOver] = useState<boolean>(false);
@@ -29,8 +31,15 @@ const FileUploader: React.FC = () => {
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const targetFile: File = e.target.files[0];
+
             setFile(targetFile);
             setFilename(targetFile.name);
+
+            let _fileType: string = targetFile.type.split("/")[0].toLowerCase();
+            if (_fileType !== "image") {
+                _fileType = "file";
+            }
+            setFileType(_fileType)
         }
     }
 
@@ -40,6 +49,7 @@ const FileUploader: React.FC = () => {
             formData.append("file", file);
 
             try {
+                console.log("UPLOAD!!!")
                 setLoading(true);
                 const response = await axios.post(
                     fileUploaderUrl, 
@@ -52,9 +62,6 @@ const FileUploader: React.FC = () => {
 
                 setApiResStatus(response.status);
                 setApiResponse(response.data);
-
-                setFile(null);
-                setFilename("");
 
             } catch (err) {
                 console.log(err)
@@ -83,28 +90,37 @@ const FileUploader: React.FC = () => {
     }
 
     useEffect(() => {
-        if (apiResStatus && apiResponse && socket && currentUserId && pubLanRoom) {
+        if (apiResStatus && apiResponse && socket && currentUserId && pubLanRoom && filename) {
             console.log("API Res Status: " + apiResStatus);
             console.log("API Response: " + JSON.stringify(apiResponse));
 
-            const fileUrl: string = apiResponse.URL;
-            
+            const fileUrl: string = apiResponse.URL
+
             if (fileUrl) {
                 const _message: Message = new MessageBuilder()
-                    .setType("file")
-                    .setMessage(fileUrl)
+                    .setType(fileType)
+                    .setMessage(" ")
+                    .setFilename(filename)
+                    .setUrl(fileUrl)
                     .setSender(currentUserId)
                     .setRoom(pubLanRoom)
                     .build()
                     
                 try {
                     socket.emit("on_message", _message);
+
                 } catch (err) {
                     console.error("Failed to send file message to socket");
+                } finally {
+                    setFile(null);
+                    setFilename("");
+                    setApiResStatus(null);
+                    setApiResponse(null);
                 }
+
             }
         }
-    }, [apiResStatus, apiResponse, currentUserId, pubLanRoom])
+    }, [apiResStatus, apiResponse, currentUserId, pubLanRoom, filename, socket])
 
     return (
         <div className="bg-yellow-200">

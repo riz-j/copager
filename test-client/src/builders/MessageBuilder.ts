@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export class MessageBuilder {
     private message: Message;
-    private static Types: string[] = ["text", "file"]
+    private static Types: string[] = ["text", "file", "image"]
 
     constructor() {
         this.message = {} as Message;
@@ -31,6 +31,16 @@ export class MessageBuilder {
         return this;
     }
 
+    setFilename(filename: string) {
+        this.message.filename = filename;
+        return this;
+    }
+
+    setUrl(url: string) {
+        this.message.url = url;
+        return this;
+    }
+
     build(): Message {
         if (!MessageBuilder.Types.includes(this.message.type)) {
             throw new Error("Message 'type' not proper");
@@ -46,6 +56,14 @@ export class MessageBuilder {
         }
         if (!this.message.room) {
             throw new Error("Message 'room' is required")
+        }
+        if (this.message.type !== "text") {
+            if (!this.message.filename) {
+                throw new Error("Message of type 'image' or 'file' requires filename")
+            }
+            if (!this.message.url) {
+                throw new Error("Message of type 'image' or 'file' requires URL")
+            }
         }
 
         return this.message;

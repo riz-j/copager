@@ -31,7 +31,7 @@ const SheetWrapper = (props: SheetWrapperProps) => {
 
     return (                                                                           
         <div className={`fixed bottom-0 w-full h-screen bg-pink-200 transition-transform 
-                        duration-500 border-2 border-green-700 ${isShown ? 'translate-y-0' : 'translate-y-full'}`}>
+                        duration-500 border-2 ${isShown ? 'translate-y-0' : 'translate-y-full'}`}>
             <img 
                 src={close_circle}
                 onClick={handleCloseSheet}

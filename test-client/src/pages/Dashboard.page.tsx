@@ -7,9 +7,9 @@ const Dashboard: React.FC = () => {
     return (
         <>
             <div className="flex font-ibm-plex">
-                <div className="fixed h-screen hidden 
+                <div className="fixed h-screen hidden border-r border-gray-200
                                 lg:block lg:w-96">  {/** For Desktop and Horizontal Tablets */}
-                    <LeftSidebar/>
+                    {/* <LeftSidebar/> */}
                 </div>
                 <div className="flex flex-col w-full h-screen pb-20
                                 lg:ml-96"> 

@@ -145,7 +145,9 @@ const FileUploader: React.FC = () => {
 
 
     return (
-        <div className="flex flex-col bg-yellow-200">
+            <div className="flex flex-col justify-center bg-yellow-200 h-full w-full 
+                            lg:pr-96"   /** "lg:pr-96" is to offset the large screen */
+            >
                 <h1>Hello there</h1>
                 { loading && <h3>Loading...</h3> }
                 <div 

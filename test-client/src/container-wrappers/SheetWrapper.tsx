@@ -26,7 +26,7 @@ const SheetWrapper = (props: SheetWrapperProps) => {
     }
 
     return (                                                                           
-        <div className={`fixed bottom-0 w-full h-screen transition-transform bg-gray-100 py-20 lg:py-0
+        <div className={`fixed bottom-0 w-full h-screen transition-transform bg-gray-100
                         duration-500 border-2 ${isShown ? 'translate-y-0' : 'translate-y-full'}`}>
             <img 
                 src={close_circle}

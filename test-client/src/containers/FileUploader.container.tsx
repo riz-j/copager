@@ -198,7 +198,7 @@ const FileUploader: React.FC = () => {
                     onMouseLeave={() => setDragOver(false)}
                     onDrop={handleDrop}
                     onClick={handleSelectFileClick}
-                    className={`flex flex-col justify-center items-center w-full h-full z-10 cursor-pointer 
+                    className={`flex flex-col justify-center items-center w-full h-full z-10 cursor-pointer mt-16
                             border-blue-500 rounded-lg ${ dragOver ? 'border-double border-8' : 'bg-white border-dashed border-2' }`}
                 >   
                     { !loading &&

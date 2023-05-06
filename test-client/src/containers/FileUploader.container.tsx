@@ -46,6 +46,7 @@ const FileUploader: React.FC = () => {
             if (targetFile.size > 2097152) {
                 alert("File is too big! Maximum file size is 2 MB");
                 setFile(null);
+                setFilename("");
                 throw new Error("File size is too big");
             }
 
@@ -98,6 +99,14 @@ const FileUploader: React.FC = () => {
 
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
             const inputFile = e.dataTransfer.files[0];
+
+            if (inputFile.size > 2097152) {
+                alert("File is too big! Maximum file size is 2 MB");
+                setFile(null);
+                setFilename("");
+                throw new Error("File size is too big");
+            }
+
             setFile(inputFile);
             setFilename(inputFile.name);
 

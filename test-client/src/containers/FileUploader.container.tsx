@@ -42,6 +42,12 @@ const FileUploader: React.FC = () => {
         if (e.target.files) {
             const targetFile: File = e.target.files[0];
 
+            if (targetFile.size > 2097152) {
+                alert("File is too big! Maximum file size is 2 MB");
+                setFile(null);
+                throw new Error("File size is too big");
+            }
+
             setFile(targetFile);
             setFilename(targetFile.name);
 
@@ -199,15 +205,12 @@ const FileUploader: React.FC = () => {
         /** For Mobile and Tablets */
         return (
             <>
-            <div className="flex flex-col gap-5 justify-center bg-white h-full w-full p-5">
+            <div className="flex flex-col gap-5 justify-between bg-gray-100 h-full w-full p-5 lg:pr-96">
                 {/* <div className="bg-yellow-200">
                     <h1>Hello there</h1>
                     { loading && <h3>Loading...</h3> }
                 </div> */}
-                <div 
-                    onClick={handleSelectFileClick}
-                    className="flex flex-col justify-center items-center w-full h-1/2 z-10 cursor-pointer"
-                >   
+                <div className="flex flex-col justify-center items-center w-full h-full z-10 cursor-pointer">   
                     { !loading &&
                         ( (imageBlob) ?
                             <img 

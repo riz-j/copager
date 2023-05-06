@@ -274,7 +274,7 @@ const FileUploader: React.FC = () => {
                         ( (imageBlob) ?
                             <img 
                                 src={imageBlob}
-                                className="max-h-full max-w-full" 
+                                className="max-h-96 max-w-full" 
                             />
                             :
                             <img 

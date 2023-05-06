@@ -53,7 +53,7 @@ const ChatBox: React.FC = () => {
                     >
                         <img 
                             src={upload_file}
-                            className="w-7 h-7 ml-2 mr-4 lg:ml-0 lg:mr-0" 
+                            className="w-6 h-6 ml-2 mr-4 lg:ml-0 lg:mr-0" 
                         />
                     </button>
                     <div className="flex flex-col w-full h-full items-center justify-around">
@@ -74,7 +74,7 @@ const ChatBox: React.FC = () => {
                     >
                         <img 
                             src={input ? send_blue : send_gray} 
-                            className="w-9 h-8 lg:w-8 lg:h-7" 
+                            className="w-8 h-7 lg:w-7" 
                         />
                     </button>
                 </div>

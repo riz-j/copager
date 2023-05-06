@@ -1,4 +1,5 @@
 import { ReactNode, useState, useEffect, createContext } from "react";
+import close_circle from "assets/close-button.svg"
 
 export const SheetWrapperContext = createContext({
     handleCloseSheet: () => {}
@@ -15,6 +16,10 @@ const SheetWrapper = (props: SheetWrapperProps) => {
     useEffect(() => {
 
         setIsShown(true);
+
+        return () => {
+            console.log("AAAND I'M OUT");
+        }
     }, []);
 
     const handleCloseSheet = () => {
@@ -26,11 +31,18 @@ const SheetWrapper = (props: SheetWrapperProps) => {
 
     return (
         <div className={`fixed bottom-0 w-full h-screen bg-pink-200 transition-transform 
-                        duration-500 ${isShown ? 'translate-y-0' : 'translate-y-full'}`}>
-            <button 
-                className="absolute top-2 right-2 bg-purple-500 p-5 z-30"
+                        duration-500 border-2 border-green-700 ${isShown ? 'translate-y-0' : 'translate-y-full'}`}>
+            {/* <button 
+                className="absolute top-2 right-2 bg-purple-500 p-5 z-30
+                            md:right-auto md:left-2"
                 onClick={handleCloseSheet}
-            >Closeee</button>
+            >Closeee</button> */}
+            <img 
+                src={close_circle}
+                onClick={handleCloseSheet}
+                className="absolute top-5 right-5 z-30 w-12 h-12 cursor-pointer
+                            md:right-auto md:left-5"
+            />
 
             <SheetWrapperContext.Provider value={{ handleCloseSheet }}>
                 {props.children}

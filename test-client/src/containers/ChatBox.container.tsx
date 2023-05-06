@@ -5,7 +5,6 @@ import { MessageBuilder } from "builders/MessageBuilder";
 import send_blue from "assets/send-blue.png";
 import send_gray from "assets/send-gray.png";
 import upload_file from "assets/upload-file.svg"
-import FileUploaderSheet from "./sheets/FileUploaderSheet.container";
 import SheetWrapper from "container-wrappers/SheetWrapper";
 import FileUploader from "./FileUploader.container";
 

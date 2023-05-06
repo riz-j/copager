@@ -145,7 +145,7 @@ const FileUploader: React.FC = () => {
 
 
     return (
-        <div className="bg-yellow-200">
+        <div className="flex flex-col bg-yellow-200">
                 <h1>Hello there</h1>
                 { loading && <h3>Loading...</h3> }
                 <div 

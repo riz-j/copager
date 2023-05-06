@@ -1,3 +1,4 @@
+import { MessageBuilder } from "builders/MessageBuilder";
 import MessageBubble from "components/MessageBubble.component";
 import NoticeMessage from "components/NoticeMessage.component";
 import { DataContext } from "contexts/DataContext";
@@ -42,7 +43,7 @@ const ChatFeed: React.FC = () => {
                         const senderDisplayName: string = sender.displayName || "unkown";
                         const senderDisplayColor: string = sender.displayColor || "#ef4444";
                         
-                        if (msg.type === "text" || msg.type === "image" || msg.type === "file") {
+                        if (MessageBuilder.Types.includes(msg.type)) {
 
                             if (!prevMsg) {
                                 /** The very start of a chat */

@@ -22,8 +22,22 @@ const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
     return (
         <>
             <div className={`flex w-full justify-start border-l-2 font-regular`} style={{borderColor: props.displayColor}}>
-                <div className={`flex max-w-[80vw] px-2`}>
-                    <p>{props.message.message}</p>
+                <div className={`flex max-w-[90vw] px-2`}>
+                    {   props.message.type === "text" &&
+                            <p>{props.message.message}</p>
+                    }
+                    {   props.message.type === "image" &&
+                            <div className="flex my-1">
+                                <img src={props.message.url} className="rounded-lg" style={{minHeight: '10rem', maxHeight: '14rem'}} />
+                            </div>
+                    }
+                    {   props.message.type === "file" &&
+                            <div className="p-2 my-1 bg-gray-300 rounded-lg">
+                                <div className="p-2">
+                                    <p>{props.message.filename}</p>
+                                </div>
+                            </div>
+                    }
                     {/* <p>ID:   {props.message._id}</p> */}
                     {/* <p>Type:   {props.message.type}</p> */}
                     {/* <p>Message:   {props.message.message}</p>  */}

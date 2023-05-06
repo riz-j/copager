@@ -42,7 +42,7 @@ const ChatFeed: React.FC = () => {
                         const senderDisplayName: string = sender.displayName || "unkown";
                         const senderDisplayColor: string = sender.displayColor || "#ef4444";
                         
-                        if (msg.type === "text") {
+                        if (msg.type === "text" || msg.type === "image" || msg.type === "file") {
 
                             if (!prevMsg) {
                                 /** The very start of a chat */

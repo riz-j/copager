@@ -13,6 +13,7 @@ import axios from "axios";
 import { SheetWrapperContext } from "container-wrappers/SheetWrapper";
 import { useDimensions } from "hooks/useDimensions";
 import upload_cloud from "assets/upload-cloud.svg";
+import loading_spinner from "assets/loading-spinner.svg";
 
 interface ApiResponse {
     message: string
@@ -235,18 +236,26 @@ const FileUploader: React.FC = () => {
                         </p>
                     }
                     { (loading) && 
-                        <h3>Loading...</h3> 
+                        <div className="flex flex-col gap-10">
+                            <img 
+                                src={loading_spinner} 
+                                className="w-24 animate-spin" 
+                            />
+                            <h1 className="text-xl">Uploading...</h1>
+                        </div>
                     }
                 </div>
                 <div className="flex flex-col justify-center items-center gap-2 font-bold">
-                    <button 
-                        onClick={handleSelectFileClick}
-                        className={`border border-black text-lg w-full py-3 rounded-lg
-                                    ${file ? 'bg-gray-300 text-black' : 'bg-blue-500 text-white'}`}
-                    >
-                        Browse Files
-                    </button>
-                    { file &&
+                    { (!loading) &&
+                        <button 
+                            onClick={handleSelectFileClick}
+                            className={`border border-black text-lg w-full py-3 rounded-lg
+                                        ${file ? 'bg-gray-300 text-black' : 'bg-blue-500 text-white'}`}
+                        >
+                            Browse Files
+                        </button>
+                    }  
+                    { (file && !loading) &&
                         <button 
                             onClick={handleFileUpload}
                             className="border border-black bg-blue-500 text-white text-lg w-full py-3 rounded-lg"

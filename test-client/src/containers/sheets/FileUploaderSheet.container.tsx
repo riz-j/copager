@@ -16,13 +16,11 @@ interface ApiResponse {
     URL: string
 }
 
-const FileUploader: React.FC = () => {
+const FileUploaderSheet: React.FC = () => {
     const socket = useContext(SocketContext);
     const fileUploaderUrl: string = import.meta.env.VITE_FILE_UPLOADER;
     const currentUserId: string | null = localStorage.getItem('currentUserId');
     const pubLanRoom: string | null = localStorage.getItem("pubLanRoom");
-
-    const { handleCloseSheet } = useContext(SheetWrapperContext);
 
     const [file, setFile] = useState<File | null>(null);
     const [fileType, setFileType] = useState<string>("");
@@ -128,8 +126,6 @@ const FileUploader: React.FC = () => {
                     setFilename("");
                     setApiResStatus(null);
                     setApiResponse(null);
-
-                    handleCloseSheet();
                 }
 
             }
@@ -145,7 +141,7 @@ const FileUploader: React.FC = () => {
 
 
     return (
-        <div className="bg-yellow-200">
+        <div className="fixed bottom-0 w-full h-screen bg-yellow-200 transition-transform duration-500 translate-y-96 hover:translate-y-0">
                 <h1>Hello there</h1>
                 { loading && <h3>Loading...</h3> }
                 <div 
@@ -170,4 +166,4 @@ const FileUploader: React.FC = () => {
     )
 }
 
-export default FileUploader;
+export default FileUploaderSheet;

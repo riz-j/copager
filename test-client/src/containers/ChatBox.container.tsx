@@ -4,7 +4,7 @@ import { Message } from "models/Message";
 import { MessageBuilder } from "builders/MessageBuilder";
 import send_blue from "assets/send-blue.png";
 import send_gray from "assets/send-gray.png";
-import upload_file from "assets/upload-file.svg"
+import upload_file from "assets/upload-icon-slate.svg"
 import SheetWrapper from "container-wrappers/SheetWrapper";
 import FileUploader from "./FileUploader.container";
 
@@ -43,7 +43,7 @@ const ChatBox: React.FC = () => {
 
     return (
         <>
-            <div className="justify-around px-1 md:px-5 w-full h-20 
+            <div className="justify-around px-1 md:px-5 w-full h-16 
                             border-t border-gray-200 backdrop-filter bg-white/80 
                             backdrop-blur-lg z-20">
                 <div className="flex justify-around items-center h-full w-full">
@@ -53,7 +53,7 @@ const ChatBox: React.FC = () => {
                     >
                         <img 
                             src={upload_file}
-                            className="w-7 h-7" 
+                            className="w-7 h-7 ml-2 mr-4" 
                         />
                     </button>
                     <div className="flex flex-col w-full h-full items-center justify-around">
@@ -70,11 +70,11 @@ const ChatBox: React.FC = () => {
                     </div>
                     <button 
                         onClick={handleSendMessage}
-                        className="ml-1 p-2"
+                        className="ml-1 mr-1 p-2"
                     >
                         <img 
                             src={input ? send_blue : send_gray} 
-                            className="w-6 h-6" 
+                            className="w-8 h-7" 
                         />
                     </button>
                 </div>
@@ -84,7 +84,6 @@ const ChatBox: React.FC = () => {
                     <SheetWrapper setShowSheet={setShowSheet}>
                         <FileUploader />
                     </SheetWrapper>
-                    // <FileUploaderSheet />
             }
         </>
     );

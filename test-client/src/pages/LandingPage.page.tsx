@@ -17,9 +17,9 @@ const LandingPage: React.FC = () => {
                 <h1 className="text-4xl font-bold bg-lime-200 px-5 md:text-5xl md:bg-white">
                     Chat with People <span className="text-purple-600">Connected</span> to the same <span className="text-purple-600">Wifi</span> as you
                 </h1>
-                <p className="text-black/60 bg-lime-200 p-5 md:text-md md:bg-white">
-                    Copager is an online LAN chat app that allows you to chat with
-                    people that are connected to the same wifi network as you.
+                <p className="text-black/60 bg-lime-200 py-5 px-10 md:text-md md:bg-white">
+                    Copager is an online LAN chat app that allows you to chat and 
+                    share files with people that are connected to the same wifi network as you.
                 </p>
                 <div className="flex flex-col w-full gap-4 bg-lime-200 px-5 md:px-[10vw] md:bg-white">
                     <a href="/chat">

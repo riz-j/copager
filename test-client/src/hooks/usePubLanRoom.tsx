@@ -17,6 +17,7 @@ export const usePubLanRoom = (): usePubLanRoom => {
       const result = await useIp();
       // const { query, asname, countryCode, mobile, proxy } = result;
       const { ip } = result;
+      // const ip = "130.200.0.1";
 
       setMobile(mobile);
       setProxy(proxy);

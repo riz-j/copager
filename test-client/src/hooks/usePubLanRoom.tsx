@@ -15,15 +15,19 @@ export const usePubLanRoom = (): usePubLanRoom => {
   useEffect(() => {
     const fetchApi = async () => {
       const result = await useIp();
-      const { query, asname, countryCode, mobile, proxy } = result;
+      // const { query, asname, countryCode, mobile, proxy } = result;
+      const { ip } = result;
 
       setMobile(mobile);
       setProxy(proxy);
 
-      if (query && asname && countryCode && (!mobile && !proxy)) {
+      // if (query && asname && countryCode && (!mobile && !proxy)) {
+        if (ip) {
 
-        const networkPrefix = networkExtractor(query);
-        const __pubLanRoom = `PUBLIC_LAN__${networkPrefix}_${asname}_${countryCode}`
+        // const networkPrefix = networkExtractor(query);
+        // const __pubLanRoom = `PUBLIC_LAN__${networkPrefix}_${asname}_${countryCode}`
+        const networkPrefix = networkExtractor(ip);
+        const __pubLanRoom = `PUBLIC_LAN__${networkPrefix}`
         setPubLanRoom(__pubLanRoom);
 
         localStorage.setItem("pubLanRoom", __pubLanRoom);

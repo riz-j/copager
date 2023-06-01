@@ -41,7 +41,7 @@ const FileUploaderSheet: React.FC = () => {
             setFilename(targetFile.name);
 
             let _fileType: string = targetFile.type.split("/")[0].toLowerCase();
-            if (_fileType !== "image") {
+            if (_fileType !== "image" && _fileType !== "video") {
                 _fileType = "file";
             }
             setFileType(_fileType)

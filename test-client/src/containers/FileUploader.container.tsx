@@ -38,6 +38,9 @@ const FileUploader: React.FC = () => {
     const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
     const [apiResStatus, setApiResStatus] = useState<number | null>(null);
 
+    useEffect(() => {
+        console.log("FILE TYPE:", fileType);
+    }, [fileType]);
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -54,7 +57,8 @@ const FileUploader: React.FC = () => {
             setFilename(targetFile.name);
 
             let _fileType: string = targetFile.type.split("/")[0].toLowerCase();
-            if (_fileType !== "image") {
+            console.log(_fileType);
+            if (_fileType !== "image" && _fileType !== "video") {
                 _fileType = "file";
             }
             setFileType(_fileType)
@@ -111,7 +115,7 @@ const FileUploader: React.FC = () => {
             setFilename(inputFile.name);
 
             let _fileType: string = inputFile.type.split("/")[0].toLowerCase();
-            if (_fileType !== "image") {
+            if (_fileType !== "image" && _fileType !== "video") {
                 _fileType = "file";
             }
             setFileType(_fileType);

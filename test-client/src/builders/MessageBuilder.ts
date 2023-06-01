@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export class MessageBuilder {
     private message: Message;
-    public static Types: string[] = ["text", "file", "image"]
+    public static Types: string[] = ["text", "file", "image", "video"]
 
     constructor() {
         this.message = {} as Message;

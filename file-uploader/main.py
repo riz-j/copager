@@ -9,7 +9,7 @@ from uuid import uuid4
 
 app = FastAPI()
 
-# app.mount("/files", StaticFiles(directory="files"), name="files")
+app.mount("/files", StaticFiles(directory="files"), name="files")
 
 app.add_middleware(
     CORSMiddleware,
@@ -19,7 +19,7 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.get("/files/{file_name}")
+@app.get("/videos/{file_name}")
 async def get_file(request: Request, file_name: str):
     path = f"files/{file_name}"
     if not os.path.exists(path):
@@ -71,6 +71,10 @@ async def upload(file: UploadFile = File(...)):
         if file_extension in forbidden_file_extensions:
             raise HTTPException(status_code=403, detail="Forbidden file type")
         
+        file_type = "files"
+        if file_extension == ".mov" or file_extension == ".mp4":
+            file_type = "videos"
+
         timestamp: int = int(time.time())
 
         new_filename = str(timestamp) + "_" + str(uuid4()) + file_extension
@@ -88,5 +92,5 @@ async def upload(file: UploadFile = File(...)):
         
     return {
         "message": "File uploaded successfully",
-        "URL": f"{root_url}/files/{new_filename}"
+        "URL": f"{root_url}/{file_type}/{new_filename}"
     }

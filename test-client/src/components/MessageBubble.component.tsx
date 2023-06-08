@@ -35,6 +35,16 @@ const MessageBubble: React.FC<MessageBubbleProps> = (props) => {
                                 />
                             </div>
                     }
+                    {   props.message.type === "video" &&
+                            <div className="my-1">
+                                <video 
+                                    src={props.message.url} 
+                                    className="rounded-md" 
+                                    style={{minHeight: '14rem', maxHeight: '14rem'}} 
+                                    controls
+                                />
+                            </div>
+                    }
                     {   props.message.type === "file" &&
                             <div className="p-2 my-1 bg-gray-300 rounded-md">
                                 <div className="p-2">
